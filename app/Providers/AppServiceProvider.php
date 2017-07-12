@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerAboService();
         $this->registerUserService();
         $this->registerUpdateWorkerService();
+        $this->registerDecisionWorkerService();
         $this->registerAlertWorkerService();
     }
 
@@ -91,9 +92,24 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Droit\Bger\Worker\Update(
                 \App::make('App\Droit\Decision\Repo\DecisionInterface'),
-                new \App\Droit\Bger\Utility\Fetch(),
+                new \App\Droit\Bger\Utility\Decision(),
                 new \App\Droit\Bger\Utility\Dispatch(),
                 new \App\Droit\Bger\Utility\Clean()
+            );
+        });
+    }
+
+    /**
+     * Decision Worker
+     */
+    protected function registerDecisionWorkerService(){
+
+        $this->app->singleton('App\Droit\Decision\Worker\DecisionWorkerInterface', function()
+        {
+            return new \App\Droit\Decision\Worker\DecisionWorker(
+                \App::make('App\Droit\Decision\Repo\DecisionInterface'),
+                new \App\Droit\Bger\Utility\Decision(),
+                new \App\Droit\Bger\Utility\Liste()
             );
         });
     }

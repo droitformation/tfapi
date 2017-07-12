@@ -37,8 +37,7 @@ class Dispatch
     {
         $exist = $this->categorie->searchByName($name);
         
-        if(!$exist)
-        {
+        if(!$exist) {
             $exist = $this->categorie->create(['name' => $name,  'name_de' => $name,  'name_it' => $name]);
         }
 

@@ -5,7 +5,7 @@ namespace App\Droit\Bger\Worker;
 use App\Droit\Bger\Worker\UpdateInterface;
 use App\Droit\Decision\Repo\DecisionInterface;
 
-use App\Droit\Bger\Utility\Fetch;
+use App\Droit\Bger\Utility\Decision;
 use App\Droit\Bger\Utility\Dispatch;
 use App\Droit\Bger\Utility\Clean;
 
@@ -18,7 +18,7 @@ class Update implements UpdateInterface
     protected $decision;
     protected $missing;
 
-    public function __construct(DecisionInterface $decision, Fetch $fetch, Dispatch $dispatch, Clean $clean)
+    public function __construct(DecisionInterface $decision, Decision $fetch, Dispatch $dispatch, Clean $clean)
     {
         $this->decision = $decision;
         $this->fetch    = $fetch;

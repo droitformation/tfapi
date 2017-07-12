@@ -21,6 +21,13 @@ class DecisionEloquent implements DecisionInterface{
     {
         return $this->decision->select('publication_at')->whereIn('publication_at', $dates)->groupBy('publication_at')->get();
     }
+
+    public function getMissingDates(array $dates)
+    {
+        $exist = $this->decision->select('publication_at')->whereIn('publication_at', $dates)->get();
+
+        return array_diff($dates, $exist->pluck('publication_at')->all());
+    }
     
     public function find($id){
 
@@ -44,6 +51,7 @@ class DecisionEloquent implements DecisionInterface{
             'categorie_id'   => isset($data['categorie_id']) ? $data['categorie_id'] : null,
             'remarque'       => isset($data['remarque']) ? $data['remarque'] : null,
             'numero'         => $data['numero'],
+            'link'           => isset($data['link']) ? $data['link'] : '',
             'texte'          => isset($data['texte']) ? $data['texte'] : '',
             'langue'         => isset($data['langue']) ? $data['langue'] : 0,
             'publish'        => isset($data['publish']) ? $data['publish'] : null,

@@ -21,7 +21,7 @@ class CreateDecisionsTable extends Migration
             $table->integer('categorie_id')->nullable();
             $table->text('remarque')->nullable();
             $table->string('link')->nullable();
-            $table->text('texte')->nullable();
+            $table->longText('texte')->nullable();
             $table->tinyInteger('langue')->nullable();
             $table->tinyInteger('publish')->nullable();
             $table->tinyInteger('updated')->nullable();

@@ -5,30 +5,51 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Droit\Bger\Worker\UpdateInterface;
-
-use App\Events\DateUpdated;
+use App\Droit\Decision\Repo\DecisionInterface;
 
 class ArticleController extends Controller
 {
     protected $update;
+    protected $decision;
 
-    public function __construct(UpdateInterface $update)
+    public function __construct(UpdateInterface $update, DecisionInterface $decision)
     {
         $this->update = $update;
+        $this->decision = $decision;
     }
 
     public function update()
     {
         /*  $this->update->missing()->update();*/
 
-        $fetch     = new \App\Droit\Bger\Utility\Fetch();
-        $decisions = $fetch->getListDecisions('161021');
-        $result    = $fetch->prepareArret($decisions->first());
+        $arret     = new \App\Droit\Bger\Utility\Decision();
+        $liste     = new \App\Droit\Bger\Utility\Liste();
+
+        $all = $liste->getList(true);
+        $in = $this->decision->getMissingDates($all->toArray());
+
+         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+        // $result = $worker->update();
 
         echo '<pre>';
-        print_r($result);
+        //print_r($all->format());
+        //print_r($result);
         echo '</pre>';
         exit();
+
+        $liste->setUrl('20161021');
+
+        $decisions = $liste->getListDecisions();
+
+        if(!$decisions->isEmpty()){
+            foreach($decisions as $decision){
+                $new = $arret->setDecision($decision)->getArret();
+                $this->decision->create($new);
+            }
+        }
+
+        $result = $arret->setDecision($decisions->first())->getArret();
+
 
         redirect('article');
     }
