@@ -25,6 +25,7 @@ class CreateDecisionsTable extends Migration
             $table->tinyInteger('langue')->nullable();
             $table->tinyInteger('publish')->nullable();
             $table->tinyInteger('updated')->nullable();
+            $table->timestamps();
         });
     }
 

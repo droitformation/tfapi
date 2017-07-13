@@ -12,8 +12,6 @@ class UpdateDateDecisions implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $worker;
-
     /**
      * Create a new job instance.
      *
@@ -21,7 +19,6 @@ class UpdateDateDecisions implements ShouldQueue
      */
     public function __construct()
     {
-        $this->worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
     }
 
     /**
@@ -31,6 +28,7 @@ class UpdateDateDecisions implements ShouldQueue
      */
     public function handle()
     {
-        $this->worker->update();
+        $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+        $worker->update();
     }
 }

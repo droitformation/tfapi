@@ -56,8 +56,8 @@ class Liste
     ==========================================*/
     public function setUrl($date)
     {
-        $this->dateListUrl = 'http://relevancy.bger.ch/php/aza/http/index_aza.php?date='.$date.'&lang=fr&mode=news';
-        $this->date = $date;
+        $this->date = \Carbon\Carbon::parse($date)->format('Ymd');
+        $this->dateListUrl = 'http://relevancy.bger.ch/php/aza/http/index_aza.php?date='.$this->date.'&lang=fr&mode=news';
 
         return $this;
     }

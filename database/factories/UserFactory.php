@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Droit\User\Entities\User::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -21,5 +21,22 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Droit\Decision\Entities\Decision::class, function (Faker $faker) {
+    return [
+        'publication_at' => $faker->dateTime,
+        'decision_at'    => $faker->dateTime,
+        'categorie_id'   => 1,
+        'remarque'       => $faker->word,
+        'numero'         => '3A_23/2017',
+        'link'           => $faker->url,
+        'texte'          => $faker->text(200),
+        'langue'         => 1,
+        'publish'        => null,
+        'updated'        => null,
+        'created_at'      => \Carbon\Carbon::now(),
+        'updated_at'      => \Carbon\Carbon::now()
     ];
 });

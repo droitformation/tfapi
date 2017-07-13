@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Droit\Bger\Worker\UpdateInterface;
 use App\Droit\Decision\Repo\DecisionInterface;
+use Illuminate\Support\Facades\App;
 
 class ArticleController extends Controller
 {
@@ -28,16 +29,19 @@ class ArticleController extends Controller
         $all = $liste->getList(true);
         $in = $this->decision->getMissingDates($all->toArray());
 
-         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
-        // $result = $worker->update();
+        //$worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+        //$result = $worker->update();
 
+        //dispatch(new \App\Jobs\UpdateDateDecisions());
+        //\Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
+        $dates = dates_range(4);
         echo '<pre>';
-        //print_r($all->format());
-        //print_r($result);
+        print_r($dates);
+        print_r($in);
         echo '</pre>';
         exit();
 
-        $liste->setUrl('20161021');
+/*        $liste->setUrl('20161021');
 
         $decisions = $liste->getListDecisions();
 
@@ -48,7 +52,7 @@ class ArticleController extends Controller
             }
         }
 
-        $result = $arret->setDecision($decisions->first())->getArret();
+        $result = $arret->setDecision($decisions->first())->getArret();*/
 
 
         redirect('article');

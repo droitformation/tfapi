@@ -1,12 +1,15 @@
 <?php namespace App\Droit\Decision\Worker;
 
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Droit\Decision\Worker\DecisionWorkerInterface;
 use App\Droit\Decision\Repo\DecisionInterface;
-use \App\Droit\Bger\Utility\Decision;
-use \App\Droit\Bger\Utility\Liste;
+use App\Droit\Bger\Utility\Decision;
+use App\Droit\Bger\Utility\Liste;
 
 class DecisionWorker implements DecisionWorkerInterface
 {
+    use DispatchesJobs;
+
     protected $repo;
     protected $decision;
     protected $liste;
@@ -23,25 +26,29 @@ class DecisionWorker implements DecisionWorkerInterface
         $list_dates    = $this->liste->getList(true);
         $missing_dates = $this->repo->getMissingDates($list_dates->toArray());
 
-        $missing_dates = array_slice($missing_dates, 0, 2);
+        // Only for testing =============================================
+        // $missing_dates = array_slice($missing_dates, 0, 2);
+        // ==============================================================
 
-        if(!empty($missing_dates)){
+        // If we have already have all dates
+        if(empty($missing_dates)){
+            \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Aucune date à mettre à jour'));
+            return true;
+        }
 
-            foreach ($missing_dates as $date) {
+        // Loop over missing dates
+        foreach ($missing_dates as $date) {
 
-                $date = \Carbon\Carbon::parse($date)->format('Ymd');
+            $this->liste->setUrl($date); // Set the url with the date
 
-                $this->liste->setUrl($date);
+            $decisions = $this->liste->getListDecisions(); // Get list of decisions for date
 
-                $decisions = $this->liste->getListDecisions();
+            if(!$decisions->isEmpty()){
+                $decisions->map(function ($decision) {
+                    dispatch(new \App\Jobs\InsertDecision($decision));
+                });
 
-                if(!$decisions->isEmpty()){
-                    foreach($decisions as $decision){
-
-                        $new = $this->decision->setDecision($decision)->getArret();
-                        $this->repo->create($new);
-                    }
-                }
+                \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des décisions terminées'));
             }
         }
 

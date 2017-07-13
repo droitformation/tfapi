@@ -13,6 +13,13 @@ function dateIsValid($date,$format = 'Y-m-d')
     return $d && $d->format($format) === $date;
 }
 
+function dates_range($nbr){
+
+    return collect(range(1,$nbr))->map(function ($item, $key) {
+        return \Carbon\Carbon::today()->subDay($item)->toDateTimeString();
+    });
+}
+
 function extractParams($string){
 
     preg_match_all('/([^?&=#]+)=([^&#]*)/',$string, $match);

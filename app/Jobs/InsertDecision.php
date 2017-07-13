@@ -12,14 +12,16 @@ class InsertDecision implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $decision;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $decision)
     {
-        //
+        $this->decision = $decision;
     }
 
     /**
@@ -29,6 +31,12 @@ class InsertDecision implements ShouldQueue
      */
     public function handle()
     {
-        //
+
+        $repo   = \App::make('App\Droit\Decision\Repo\DecisionInterface');
+        $worker = new \App\Droit\Bger\Utility\Decision();
+
+        $data = $worker->setDecision($this->decision)->getArret();
+        $repo->create($data);
+
     }
 }

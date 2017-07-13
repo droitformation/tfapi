@@ -34,6 +34,13 @@ class DecisionEloquent implements DecisionInterface{
         return $this->decision->with(['categorie'])->findOrFail($id);
     }
 
+    public function findByNumeroAndDate($numero,$date){
+
+        $found = $this->decision->where('numero','=',$numero)->where('publication_at','=',$date)->get();
+
+        return !$found->isEmpty() ? $found->first() : false;
+    }
+
     public function search($terms = null, $categorie = null, $publish = null)
     {
        return $this->decision->with(['categorie'])
@@ -56,6 +63,8 @@ class DecisionEloquent implements DecisionInterface{
             'langue'         => isset($data['langue']) ? $data['langue'] : 0,
             'publish'        => isset($data['publish']) ? $data['publish'] : null,
             'updated'        => isset($data['updated']) ? $data['updated'] : null,
+            'created_at'     => \Carbon\Carbon::now(),
+            'updated_at'     => \Carbon\Carbon::now()
         ));
 
         if( ! $decision )

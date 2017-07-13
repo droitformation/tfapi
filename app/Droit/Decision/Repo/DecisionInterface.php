@@ -7,6 +7,7 @@ interface DecisionInterface {
     public function getMissingDates(array $dates);
     public function search($terms = null, $categorie = null, $publish = null);
     public function find($data);
+    public function findByNumeroAndDate($numero,$date);
     public function create(array $data);
     public function update(array $data);
     public function delete($id);

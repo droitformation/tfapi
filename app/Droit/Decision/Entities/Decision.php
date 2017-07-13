@@ -7,11 +7,7 @@ use Laravel\Scout\Searchable;
 
 class Decision extends Model
 {
-   // use Searchable;
-
     protected $table = 'decisions';
-
-    public $timestamps = false;
 
     protected $dates = ['publication_at','decision_at'];
 
