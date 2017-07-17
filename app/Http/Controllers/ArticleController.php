@@ -32,8 +32,8 @@ class ArticleController extends Controller
         //$worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
         //$result = $worker->update();
 
-        //dispatch(new \App\Jobs\UpdateDateDecisions());
-        //\Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
+        dispatch(new \App\Jobs\UpdateDateDecisions());
+        \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
         $dates = dates_range(4);
         echo '<pre>';
         print_r($dates);

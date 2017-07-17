@@ -20,8 +20,6 @@ Route::get('/', function () {
 
     $results = $model->search($expect, 188, 1);
 
-    \Mail::to('cindy.leschaud@gmail.com')->send(new \App\Mail\ErrorNotification('la raison de erreur'));
-
 });
 
 Route::get('articles', 'ArticleController@index');
