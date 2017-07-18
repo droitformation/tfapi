@@ -14,7 +14,7 @@ class DecisionEloquent implements DecisionInterface{
 
     public function getAll()
     {
-        return $this->decision->all();
+        return $this->decision->with(['categorie'])->get();
     }
 
     public function getDates(array $dates)

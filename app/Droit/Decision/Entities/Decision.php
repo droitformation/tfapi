@@ -51,6 +51,6 @@ class Decision extends Model
 
     public function categorie()
     {
-        return $this->hasMany('App\Droit\Categorie\Entities\Categorie');
+        return $this->belongsTo('App\Droit\Categorie\Entities\Categorie');
     }
 }

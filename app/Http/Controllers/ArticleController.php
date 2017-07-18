@@ -83,8 +83,13 @@ class ArticleController extends Controller
 
     public function test()
     {
-        $articles = \App\Droit\Decision\Entities\Decision::orderBy('id','DESC')->take(1)->get();
+        setlocale(LC_ALL, 'fr_FR.UTF-8');
 
-        return view('article')->with(['article' => $articles->first()]);
+        $repo   = App::make('App\Droit\Decision\Repo\DecisionInterface');
+        $arrets = $repo->getAll()->take(5);
+/*        echo '<pre>';
+        print_r($arrets);
+        echo '</pre>';exit();*/
+        return view('emails.alert')->with(['arrets' => $arrets]);
     }
 }

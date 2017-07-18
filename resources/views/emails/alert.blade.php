@@ -34,6 +34,10 @@
             background:transparent !important;
             border:none !important;
         }
+        
+        .blue{
+            color: #43637c;
+        }
 
         @media only screen and (max-width:480px) {
 
@@ -141,7 +145,7 @@
 
         a.link1{
             font-size:13px;
-            color:#27A1E5;
+            color:#0f4060;
             line-height: 24px;
             text-decoration:none;
         }
@@ -151,14 +155,14 @@
 
         .link2{
             color:#ffffff;
-            border-top:10px solid #27A1E5;
-            border-bottom:10px solid #27A1E5;
-            border-left:18px solid #27A1E5;
-            border-right:18px solid #27A1E5;
+            border-top:10px solid #0f4060;
+            border-bottom:10px solid #0f4060;
+            border-left:18px solid #0f4060;
+            border-right:18px solid #0f4060;
             border-radius:3px;
             -moz-border-radius:3px;
             -webkit-border-radius:3px;
-            background:#27A1E5;
+            background:#0f4060;
         }
 
         .link3{
@@ -172,7 +176,7 @@
         }
 
         .link4{
-            color:#27A1E5;
+            color:#0f4060;
             line-height: 24px;
         }
 
@@ -182,7 +186,7 @@
         p{
             font-size: 14px;
             line-height: 21px;
-            color:#AAAAAA;
+            color:#000;
         }
 
         .contentEditable li{
@@ -217,7 +221,7 @@
 {
     "name":"Default",
     "bgBody":"ffffff",
-    "link":"27A1E5",
+    "link":"0f4060",
     "color":"AAAAAA",
     "bgItem":"ffffff",
     "title":"444444"
@@ -230,7 +234,8 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
     <tr>
-        <td><table width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff" style="font-family:helvetica, sans-serif;" class="MainContainer">
+        <td>
+            <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff" style="font-family:helvetica, sans-serif;" class="MainContainer">
                 <!-- =============== START HEADER =============== -->
                 <tbody>
                 <tr>
@@ -242,51 +247,7 @@
                                         <tbody>
                                         <tr>
                                             <td class="movableContentContainer">
-                                                <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td height="15"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                                <tbody>
-                                                                                <tr>
-                                                                                    <td colspan="3" valign="middle" style='vertical-align: middle;'>
-                                                                                        <div class='contentEditableContainer contentTextEditable'>
-                                                                                            <div class='contentEditable' style='text-align: left;font-weight: light; color:#555555;font-size:26;line-height:45px;font-family: Helvetica Neue;'>
-                                                                                                <h1 class='big'><a target='_blank' href="[CLIENTS.WEBSITE]" style='color:#444444'><strong>Droit</strong> pour le Praticien</a></h1>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </td>
-                                                                        <td valign="top" width="90" class="spechide">&nbsp;</td>
-                                                                        <td valign="middle" style='vertical-align: middle;' width='150'>
-                                                                            <div class='contentEditableContainer contentTextEditable'>
-                                                                                <div class='contentEditable' style='text-align: right;'>
-                                                                                    <a target='_blank' href="[SHOWEMAIL]" class='link1' >Open in your browser</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td height='15'></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td ><hr style='height:1px;background:#DDDDDD;border:none;'></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+
                                                 <!-- =============== END HEADER =============== -->
                                                 <!-- =============== START BODY =============== -->
 
@@ -294,14 +255,13 @@
                                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td height="40"></td>
+                                                            <td height="20"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" width="580"><div class='contentEditableContainer contentImageEditable'>
-                                                                    <div class='contentEditable' style="text-align: center;">
-                                                                        <img class="banner" src="{{ asset('images/bigImg.png') }}" alt="Logo" title="Logo" width="580" height="221" border="0">
-                                                                    </div>
-                                                                </div>
+                                                            <td valign="top" width="580">
+                                                                <a style="text-decoration: none;" href="{{ url('http://droitpraticien.ch') }}">
+                                                                    <img class="banner" src="{{ asset('images/bigImg.jpg') }}" alt="Logo" title="Logo" width="580" height="140" border="0">
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -311,30 +271,29 @@
                                                 <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
                                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tbody>
+                                                        <tr><td height='20'></td></tr>
                                                         <tr>
-                                                            <td height='40'></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: 1px solid #EEEEEE; border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <td style="border: 1px solid #EEEEEE;background:#F6F6F6; border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tbody>
                                                                     <tr>
-                                                                        <td valign="top" width="40">&nbsp;</td>
+                                                                        <td valign="top" width="20">&nbsp;</td>
                                                                         <td><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-                                                                                <tr><td height='25'></td></tr>
+                                                                                <tr><td height='15'></td></tr>
                                                                                 <tr>
                                                                                     <td>
                                                                                         <div class='contentEditableContainer contentTextEditable'>
                                                                                             <div class='contentEditable' style='text-align: center;'>
-                                                                                                <h2 style="font-size: 20px;">First Feature</h2>
-                                                                                                <br>
-                                                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.</p>
+                                                                                                <h2 style="font-size: 20px;">Bonjour Cindy Admin Leschaud</h2>
+                                                                                                <br/>
+                                                                                                <p style="color:#656565; margin-bottom: 5px;">Voici les derniers arrêts correspondant à vos abonnements</p>
+                                                                                                <p>Date de publication <strong>14 juillet 2017</strong></p>
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr><td height='24'></td></tr>
+                                                                                <tr><td height='14'></td></tr>
                                                                             </table></td>
-                                                                        <td valign="top" width="40">&nbsp;</td>
+                                                                        <td valign="top" width="20">&nbsp;</td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>
@@ -343,43 +302,35 @@
                                                         </tbody>
                                                     </table>
 
-
-
                                                 </div>
+
                                                 <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
                                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tbody>
+                                                        <tr><td height="20"></td></tr>
                                                         <tr>
-                                                            <td height="40"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <td>
+                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tbody>
-                                                                    <tr>
-                                                                        <td class="specbundle"><div class='contentEditableContainer contentTextEditable'>
-                                                                                <div class='contentEditable' style='text-align: left;'>
-                                                                                    <h2 style="font-size: 20px;">Subtitle</h2>
-                                                                                    <br>
-                                                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.
-                                                                                    </p>
-                                                                                    <br><br>
-                                                                                    <a target='_blank' href="#" class='link2' style='color:#ffffff'>Call to action</a>
-                                                                                    <br>
-                                                                                </div>
-                                                                            </div></td>
-                                                                        <td valign="top" width="75" class="specbundle">&nbsp;</td>
-                                                                        <td class="specbundle"><div class='contentEditableContainer contentTextEditable'>
-                                                                                <div class='contentEditable' style='text-align: left;'>
-                                                                                    <h2 style="font-size: 20px;">Subtitle</h2>
-                                                                                    <br>
-                                                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.
-                                                                                    </p>
-                                                                                    <br><br>
-                                                                                    <a target='_blank' href="#" class='link2' style='color:#ffffff'>Call to action</a>
-                                                                                    <br>
-                                                                                </div>
-                                                                            </div></td>
+                                                                    <tr align="left">
+                                                                        <th height="22" width="110" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
+                                                                        <th height="22" width="290" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
+                                                                        <th height="22" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Référence</th>
+                                                                        <th height="22" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Mots clés</th>
                                                                     </tr>
+                                                                    <tr><td colspan="4" height="8"></td></tr>
+
+                                                                    @if(!$arrets->isEmpty())
+                                                                        @foreach($arrets as $arret)
+                                                                            <tr align="left" style="font-size: 13px;">
+                                                                                <td style="padding: 5px 0;">{{ $arret->decision_at->formatLocalized('%d %B %Y') }}</td>
+                                                                                <td style="padding: 5px 0;">{{ isset($arret->categorie) ? $arret->categorie->name : '' }}</td>
+                                                                                <td style="padding: 5px 0;"><strong><a href="">{{ $arret->numero }}</a></strong></td>
+                                                                                <td style="padding: 5px 0;">Call to action</td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @endif
+
                                                                     </tbody>
                                                                 </table>
                                                             </td>
@@ -387,179 +338,8 @@
                                                         </tbody>
                                                     </table>
 
-
-
                                                 </div>
-                                                <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td height="40"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="background:#F6F6F6; border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td width="40" valign="top">&nbsp;</td>
-                                                                        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-                                                                                <tr><td height='25'></td></tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class='contentEditableContainer contentTextEditable'>
-                                                                                            <div class='contentEditable' style='text-align: center;'>
-                                                                                                <h2 style="font-size: 20px;">Second Feature</h2>
-                                                                                                <br>
-                                                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.
-                                                                                                </p>
-                                                                                                <br><br>
-                                                                                                <a target='_blank' href="#" class='link3' style='color:#555555;'>Call to action</a>
-                                                                                                <br>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr><td height='24'></td></tr>
-                                                                            </table></td>
-                                                                        <td width="40" valign="top">&nbsp;</td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
 
-
-
-                                                </div>
-                                                <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td height="40"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td class="specbundle" valign="top" width="142" align="center"><div class='contentEditableContainer contentImageEditable'>
-                                                                                <div class='contentEditable'>
-                                                                                    <img src="{{ asset('images/side.png') }}" alt="side image" width='142' height='142' data-default="placeholder" border="0">
-                                                                                </div>
-                                                                            </div></td>
-                                                                        <td width="20" valign="top" class="spechide"></td>
-                                                                        <td class="specbundle"><table width="100%" cellpadding="0" cellspacing="0" align="center">
-                                                                                <tr><td height='15'></td></tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class='contentEditableContainer contentTextEditable'>
-                                                                                            <div class='contentEditable' style='text-align: left;'>
-                                                                                                <h2 style='font-size:16px;'>Sub Feature 1</h2>
-                                                                                                <br>
-                                                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.</p>
-                                                                                                <br>
-                                                                                                <a target='_blank' href="#" class='link4' style='color:#27A1E5;' >read more</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table></td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-
-
-
-                                                </div>
-                                                <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td height="40"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td valign="top" class="specbundle"><table width="100%" cellpadding="0" cellspacing="0" align="center">
-                                                                                <tr><td height='15'></td></tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class='contentEditableContainer contentTextEditable'>
-                                                                                            <div class='contentEditable' style='text-align: left;'>
-                                                                                                <h2 style='font-size:16px;'>Sub Feature 2</h2>
-                                                                                                <br>
-                                                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.</p>
-                                                                                                <br>
-                                                                                                <a target='_blank' href="#" class='link4' style='color:#27A1E5;' >read more</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table></td>
-                                                                        <td width="20" class="spechide">&nbsp;</td>
-                                                                        <td class="specbundle" valign="top" width="142" align="center">
-                                                                            <div class='contentEditableContainer contentImageEditable'>
-                                                                                <div class='contentEditable'>
-                                                                                    <img src="{{ asset('images/side2.png') }}" alt="side image" width='142' height='142' data-default="placeholder" border="0">
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-
-
-                                                </div>
-                                                <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td height="40"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td class="specbundle" valign="top" width="142" align="center"><div class='contentEditableContainer contentImageEditable'>
-                                                                                <div class='contentEditable'>
-                                                                                    <img src="{{ asset('images/side3.png') }}" alt="side image" width='142' height='142' data-default="placeholder" border="0">
-                                                                                </div>
-                                                                            </div></td>
-                                                                        <td width="20" valign="top" class="spechide"></td>
-                                                                        <td class="specbundle"><table width="100%" cellpadding="0" cellspacing="0" align="center">
-                                                                                <tr><td height='15'></td></tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class='contentEditableContainer contentTextEditable'>
-                                                                                            <div class='contentEditable' style='text-align: left;'>
-                                                                                                <h2 style='font-size:16px;'>Sub Feature 3</h2>
-                                                                                                <br>
-                                                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been the industry's standard dummy text ever since the 1500s.</p>
-                                                                                                <br>
-                                                                                                <a target='_blank' href="#" class='link4' style='color:#27A1E5;' >read more</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table></td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table></td>
-                                                        </tr>
-                                                        <tr><td height='40' colspan="3"></td></tr>
-                                                        <tr><td colspan="3"><hr style='height:1px;background:#DDDDDD;border:none;'></td></tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
 
                                                 <!-- =============== END BODY =============== -->
                                                 <!-- =============== START FOOTER =============== -->
@@ -567,12 +347,11 @@
                                                 <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
                                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tbody>
+                                                        <tr><td height="20"></td></tr>
                                                         <tr>
-                                                            <td height="48"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top: 1px solid #ddd;">
                                                                     <tbody>
+                                                                    <tr><td colspan="3" height="20"></td></tr>
                                                                     <tr>
                                                                         <td valign="top" width="90" class="spechide">&nbsp;</td>
                                                                         <td><table width="100%" cellpadding="0" cellspacing="0" align="center">
@@ -580,13 +359,13 @@
                                                                                     <td>
                                                                                         <div class='contentEditableContainer contentTextEditable'>
                                                                                             <div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
+                                                                                                <p>Ceci est une alerte email de <a style="color: #1d74ac;" href="http:// www.droitpraticien.ch"> www.droitpraticien.ch</a></p>
                                                                                                 <p>
-                                                                                                    Sent by [SENDER_NAME] <br/>
-                                                                                                    [CLIENTS.ADDRESS] <br/>
-                                                                                                    [CLIENTS.PHONE] <br/>
-                                                                                                    <a target='_blank' href="[FORWARD]" style='color:#AAAAAA;'>Forward to a friend</a> <br/>
-                                                                                                    <a target='_blank' href="[UNSUBSCRIBE]" style='color:#AAAAAA;' >Unsubscribe</a>
+                                                                                                    Faculté de droit<br/>
+                                                                                                    Avenue du 1er-Mars 26<br/>
+                                                                                                    2000 Neuchâtel<br/>
                                                                                                 </p>
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>
@@ -598,72 +377,13 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
+                                                        <tr><td height="28"></td></tr>
                                                         </tbody>
                                                     </table>
 
 
                                                 </div>
-                                                <div class="movableContent" style="border: 0px; padding-top: 0px; position: relative;">
 
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td height="40"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td valign="top" width="185" class="spechide">&nbsp;</td>
-                                                                        <td class="specbundle2"><table width="100%" cellpadding="0" cellspacing="0" align="center">
-                                                                                <tr>
-                                                                                    <td width='40'>
-                                                                                        <div class='contentEditableContainer contentFacebookEditable'>
-                                                                                            <div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
-                                                                                                <img src="{{ asset('images/facebook.png') }}" alt="facebook" width='40' height='40' data-max-width="40" data-customIcon="true" border="0" >
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td width='10'></td>
-                                                                                    <td width='40'>
-                                                                                        <div class='contentEditableContainer contentTwitterEditable'>
-                                                                                            <div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
-                                                                                                <img src="{{ asset('images/twitter.png') }}" alt="twitter" width='40' height='40' data-max-width="40" data-customIcon="true" border="0">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td width='10'></td>
-                                                                                    <td width='40'>
-                                                                                        <div class='contentEditableContainer contentImageEditable'>
-                                                                                            <div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
-                                                                                                <img src="{{ asset('images/red.png') }}" alt="Pinterest" width='40' height='40' data-max-width="40" border="0">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td width='10'></td>
-                                                                                    <td width='40'>
-                                                                                        <div class='contentEditableContainer contentImageEditable'>
-                                                                                            <div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
-                                                                                                <img src="{{ asset('images/blue.png') }}" alt="Social media" width='40' height='40' data-max-width="40" border="0">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table></td>
-                                                                        <td valign="top" width="185" class="spechide">&nbsp;</td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td height='40'></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                                    <!-- =============== END FOOTER =============== -->
-                                                </div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -677,8 +397,14 @@
                 </tr>
                 </tbody>
             </table>
+            <table align="center">
+                <tr align="center">
+                    <td><p style="font-family: Arial, sans-serif; padding-top: 5px;">Droit pour le Praticien © Copyright {{ date('Y') }}</p></td>
+                </tr>
+            </table>
         </td>
     </tr>
+
     </tbody>
 </table>
 
