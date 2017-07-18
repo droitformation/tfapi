@@ -17,9 +17,7 @@ class UpdateDateDecisions implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     /**
      * Execute the job.
@@ -29,6 +27,6 @@ class UpdateDateDecisions implements ShouldQueue
     public function handle()
     {
         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
-        $worker->update();
+        $worker->setMissingDates()->update();
     }
 }

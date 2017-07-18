@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerDecisionService();
+        $this->registerFailedService();
         $this->registerCategorieService();
         $this->registerAboService();
         $this->registerUserService();
@@ -41,6 +42,17 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('App\Droit\Decision\Repo\DecisionInterface', function()
         {
             return new \App\Droit\Decision\Repo\DecisionEloquent( new \App\Droit\Decision\Entities\Decision );
+        });
+    }
+
+    /**
+     * Failed
+     */
+    protected function registerFailedService(){
+
+        $this->app->singleton('App\Droit\Decision\Repo\FailedInterface', function()
+        {
+            return new \App\Droit\Decision\Repo\FailedEloquent( new \App\Droit\Decision\Entities\Failed );
         });
     }
 

@@ -60,11 +60,11 @@ class DecisionWorkerTest extends TestCase
         // missing dates empty send mail
 
         // list set url with date, getListDecisions
+        $this->list->shouldReceive('setUrl')->times(3)->andReturn($this->list);
         $this->list->shouldReceive('getListDecisions')->andReturn(collect($decisions));
-        $this->list->shouldReceive('setUrl')->times(3);
 
         $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->decision,$this->list);
-        $worker->update();
+        $worker->setMissingDates()->update();
 
       // dispatch App\Jobs\InsertDecision x nbr of decision
         \Queue::assertPushed(\App\Jobs\InsertDecision::class, function ($job) use ($decisions) {
@@ -74,12 +74,39 @@ class DecisionWorkerTest extends TestCase
         \Queue::assertPushed(\App\Jobs\InsertDecision::class, function ($job) use ($decisions) {
             return $decisions[1]['numero'] === '5A_6/2016';
         });
- /*
-        // send mail notification job finish
-        \Queue::assertPushed(\App\Mail\SuccessNotification::class, function ($job) {
-            return $job->to === 'cindy.leschaud@gmail.com';
-        });*/
+    }
 
-        \Mail::shouldReceive('queue')->once();
+    public function testRunWorkerNoMissingDate()
+    {
+        \Mail::fake();
+
+        // get list on list
+        $this->list->shouldReceive('getList')->once()->andReturn(dates_range(3));
+        // repo missing dates
+        $this->repo->shouldReceive('getMissingDates')->once()->andReturn([]);
+
+        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->decision,$this->list);
+        $worker->setMissingDates()->update();
+
+        // missing dates empty send mail
+        \Mail::assertSent(\App\Mail\SuccessNotification::class, function ($mail){
+            return $mail->hasTo('cindy.leschaud@gmail.com');
+        });
+    }
+
+    public function testRunWorkerSetMissingDate()
+    {
+        $collection_dates = dates_range(3);
+
+        // no need to call getList we passing manually somme dates
+        // repo missing dates
+        $this->repo->shouldReceive('getMissingDates')->once()->andReturn($collection_dates);
+
+        // Create a decision worker instance with mocked dependencies
+        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->decision,$this->list);
+        $worker->setMissingDates($collection_dates);
+
+        // missing dates should be the same as passed
+        $this->assertEquals($worker->missing_dates,$collection_dates);
     }
 }

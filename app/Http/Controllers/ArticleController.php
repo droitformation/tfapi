@@ -29,14 +29,20 @@ class ArticleController extends Controller
         $all = $liste->getList(true);
         $in = $this->decision->getMissingDates($all->toArray());
 
-        //$worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
-        //$result = $worker->update();
+        $dates = collect([
+            \Carbon\Carbon::createFromDate(2017, 6, 5)->startOfDay()->toDateTimeString(),
+            \Carbon\Carbon::createFromDate(2017, 6, 6)->startOfDay()->toDateTimeString(),
+        ]);
 
-        dispatch(new \App\Jobs\UpdateDateDecisions());
-        \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
-        $dates = dates_range(4);
+       // $worker = App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+        //$worker->setMissingDates($dates)->update();
+
+
+        //dispatch(new \App\Jobs\UpdateDateDecisions());
+      // \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
+
         echo '<pre>';
-        print_r($dates);
+
         print_r($in);
         echo '</pre>';
         exit();
@@ -60,6 +66,8 @@ class ArticleController extends Controller
 
     public function search()
     {
+         \Mail::to('cindy.leschaud@gmail.com')->send(new \App\Mail\AlerteDecision());
+
          $term = 'Détention';
 
          $articles = \App\Droit\Decision\Entities\Decision::where('texte','LIKE','%'.$term.'%')

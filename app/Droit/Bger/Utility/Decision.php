@@ -6,8 +6,8 @@ use Goutte\Client;
 
 class Decision {
 
-	protected $html;
-    protected $dispatch;
+    public $html;
+    public $dispatch;
     public $decision;
 
 	function __construct() 
@@ -50,6 +50,12 @@ class Decision {
 	public function getArret()
 	{
         $arret = $this->grabHtml($this->decision);
+
+        // The grab of html has failed return false
+        if(empty(array_filter($arret))){
+            return false;
+        }
+
         $url   = $this->makeUrl($this->decision['decision_at'],$this->decision['numero']);
 
         $categorie = cleanCategorieString($this->decision['categorie']);

@@ -31,12 +31,18 @@ class InsertDecision implements ShouldQueue
      */
     public function handle()
     {
-
         $repo   = \App::make('App\Droit\Decision\Repo\DecisionInterface');
+        $failed = \App::make('App\Droit\Decision\Repo\FailedInterface');
+
         $worker = new \App\Droit\Bger\Utility\Decision();
 
         $data = $worker->setDecision($this->decision)->getArret();
-        $repo->create($data);
 
+        if($data){
+            $repo->create($data);
+        }
+        else{
+            $failed->create(['publication_at' => $data['publication_at'], 'numero' => $data['numero']]);
+        }
     }
 }

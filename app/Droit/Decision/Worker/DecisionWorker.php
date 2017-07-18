@@ -5,6 +5,7 @@ use App\Droit\Decision\Worker\DecisionWorkerInterface;
 use App\Droit\Decision\Repo\DecisionInterface;
 use App\Droit\Bger\Utility\Decision;
 use App\Droit\Bger\Utility\Liste;
+use Illuminate\Support\Collection;
 
 class DecisionWorker implements DecisionWorkerInterface
 {
@@ -14,6 +15,8 @@ class DecisionWorker implements DecisionWorkerInterface
     protected $decision;
     protected $liste;
 
+    public $missing_dates;
+
     public function __construct(DecisionInterface $repo, Decision $decision, Liste $liste)
     {
         $this->repo = $repo;
@@ -21,36 +24,37 @@ class DecisionWorker implements DecisionWorkerInterface
         $this->liste = $liste;
     }
 
+    public function setMissingDates(Collection $dates = null)
+    {
+        if(!$dates){
+            $dates = $this->liste->getList(true);
+        }
+
+        $this->missing_dates = $this->repo->getMissingDates($dates->toArray());
+
+        return $this;
+    }
+
     public function update()
     {
-        $list_dates    = $this->liste->getList(true);
-        $missing_dates = $this->repo->getMissingDates($list_dates->toArray());
-
-        // Only for testing =============================================
-        // $missing_dates = array_slice($missing_dates, 0, 2);
-        // ==============================================================
-
         // If we have already have all dates
-        if(empty($missing_dates)){
-            \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Aucune date à mettre à jour'));
+        if(empty($this->missing_dates)){
+            \Mail::to('cindy.leschaud@gmail.com')->send(new \App\Mail\SuccessNotification('Aucune date à mettre à jour'));
             return true;
         }
 
         // Loop over missing dates
-        foreach ($missing_dates as $date) {
+        foreach($this->missing_dates as $date) {
 
-            $this->liste->setUrl($date); // Set the url with the date
-
-            $decisions = $this->liste->getListDecisions(); // Get list of decisions for date
+            $decisions = $this->liste->setUrl($date)->getListDecisions(); // Get list of decisions for date
 
             if(!$decisions->isEmpty()){
                 $decisions->map(function ($decision) {
                     dispatch(new \App\Jobs\InsertDecision($decision));
                 });
 
-                \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des décisions terminées'));
+                \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des décisions terminées '.$date));
             }
         }
-
     }
 }
