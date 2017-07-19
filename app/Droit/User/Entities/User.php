@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name', 'email', 'password',
+        'first_name','last_name', 'email', 'password','active_until','cadence',
     ];
 
     /**
@@ -27,12 +27,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['active_until'];
+
+    public function getAbonnementsAttribute()
+    {
+        return $this->abos->groupBy('categorie_id')->map(function($keywords,$categorie_id){
+            $published = $this->published->contains('categorie_id',$categorie_id);
+            return ['keywords' => $keywords->pluck('keywords_list')->flatten(), 'published' => $published];
+        });
+    }
+
     public function abos()
     {
         return $this->hasMany('App\Droit\Abo\Entities\Abo');
     }
 
-    public function abo_publish()
+    public function published()
     {
         return $this->hasMany('App\Droit\Abo\Entities\Abo_publish');
     }

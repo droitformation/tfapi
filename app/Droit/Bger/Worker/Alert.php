@@ -2,23 +2,36 @@
 
 namespace App\Droit\Bger\Worker;
 
-use App\Droit\Bger\Worker\SearchInterface;
+use App\Droit\Bger\Worker\AlertInterface;
 
 use App\Droit\Decision\Repo\DecisionInterface;
-use App\Droit\Bger\Utility\Clean;
+use App\Droit\User\Repo\UserInterface;
 
-class Alert implements SearchInterface
+class Alert implements AlertInterface
 {
-    protected $clean;
     protected $decision;
+    protected $user;
+    protected $cadence;
 
-    public function __construct(DecisionInterface $decision, Clean $clean)
+    public function __construct(DecisionInterface $decision, UserInterface $user)
     {
         $this->decision = $decision;
-        $this->clean    = $clean;
+        $this->user     = $user;
     }
 
-    public function all($search)
+    /**
+     * @param mixed $cadence
+     */
+    public function setCadence($cadence)
+    {
+        $this->cadence = $cadence;
+    }
+
+    // get all user
+    // daily abo and weekly if it is friday
+    // loop each keywords list
+    // Search in new decisisions of the day or week
+    public function getUsers()
     {
 
     }

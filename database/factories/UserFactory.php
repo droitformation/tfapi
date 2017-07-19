@@ -21,6 +21,8 @@ $factory->define(App\Droit\User\Entities\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'active_until' => null,
+        'cadence' => null,
     ];
 });
 
@@ -38,5 +40,18 @@ $factory->define(App\Droit\Decision\Entities\Decision::class, function (Faker $f
         'updated'        => null,
         'created_at'      => \Carbon\Carbon::now(),
         'updated_at'      => \Carbon\Carbon::now()
+    ];
+});
+
+$categories = \App\Droit\Categorie\Entities\Categorie::all();
+
+$factory->define(App\Droit\Abo\Entities\Abo::class, function (Faker $faker) use ($categories) {
+
+    $categorie = $categories->random();
+
+    return [
+        'user_id'       => $faker->numberBetween(1,10),
+        'categorie_id'  => $categorie->id,
+        'keywords'      => $faker->word,
     ];
 });

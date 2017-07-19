@@ -19,7 +19,12 @@ class UserEloquent implements UserInterface{
 
     public function find($id)
     {
-        return $this->user->with(['abos','abo_publish'])->find($id);
+        return $this->user->with(['abos','published'])->find($id);
+    }
+
+    public function getByCadence($cadence)
+    {
+        return $this->user->with(['abos','published'])->where('cadence','=',$cadence)->whereDate('active_until', '>', \Carbon\Carbon::today()->startOfDay())->get();
     }
     
     public function create(array $data)

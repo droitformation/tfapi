@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>[SUBJECT]</title>
+    <title>Alertes | Droit pour le Praticien</title>
     <style type="text/css">
         body {
             padding-top: 0 !important;
@@ -34,20 +34,14 @@
             background:transparent !important;
             border:none !important;
         }
-        
-        .blue{
-            color: #43637c;
-        }
 
         @media only screen and (max-width:480px) {
 
-            table[class="MainContainer"], td[class="cell"]
-            {
+            table[class="MainContainer"], td[class="cell"] {
                 width: 100% !important;
                 height:auto !important;
             }
-            td[class="specbundle"]
-            {
+            td[class="specbundle"] {
                 width: 100% !important;
                 float:left !important;
                 font-size:13px !important;
@@ -55,8 +49,7 @@
                 display:block !important;
                 padding-bottom:15px !important;
             }
-            td[class="specbundle2"]
-            {
+            td[class="specbundle2"] {
                 width:80% !important;
                 float:left !important;
                 font-size:13px !important;
@@ -233,17 +226,20 @@
 <body paddingwidth="0" paddingheight="0" bgcolor="#d1d3d4"  style="padding-top: 0; padding-bottom: 0; padding-top: 0; padding-bottom: 0; background-repeat: repeat; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;" offset="0" toppadding="0" leftpadding="0">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
+    <tr><td valign="top" height="10"></td></tr>
     <tr>
         <td>
             <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff" style="font-family:helvetica, sans-serif;" class="MainContainer">
                 <!-- =============== START HEADER =============== -->
                 <tbody>
                 <tr>
-                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
                             <tr>
                                 <td valign="top" width="20">&nbsp;</td>
-                                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                         <tr>
                                             <td class="movableContentContainer">
@@ -273,25 +269,23 @@
                                                         <tbody>
                                                         <tr><td height='20'></td></tr>
                                                         <tr>
-                                                            <td style="border: 1px solid #EEEEEE;background:#F6F6F6; border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <td style="border: 1px solid #EEEEEE;background:#f2f2f2; border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px">
+                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tbody>
                                                                     <tr>
                                                                         <td valign="top" width="20">&nbsp;</td>
                                                                         <td><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-                                                                                <tr><td height='15'></td></tr>
+                                                                                <tr><td height='8'></td></tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <div class='contentEditableContainer contentTextEditable'>
-                                                                                            <div class='contentEditable' style='text-align: center;'>
-                                                                                                <h2 style="font-size: 20px;">Bonjour Cindy Admin Leschaud</h2>
-                                                                                                <br/>
-                                                                                                <p style="color:#656565; margin-bottom: 5px;">Voici les derniers arrêts correspondant à vos abonnements</p>
-                                                                                                <p>Date de publication <strong>14 juillet 2017</strong></p>
-                                                                                            </div>
+                                                                                        <div class='contentEditable' style='text-align: center;'>
+                                                                                            <h2 style="font-size: 18px;">Bonjour Cindy Admin Leschaud</h2>
+                                                                                            <p style="color:#585858; margin-bottom: 5px; margin-top: 5px;">Voici les derniers arrêts correspondant à vos abonnements</p>
+                                                                                            <p><strong>Date de publication 14 juillet 2017</strong></p>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr><td height='14'></td></tr>
+                                                                                <tr><td height='4'></td></tr>
                                                                             </table></td>
                                                                         <td valign="top" width="20">&nbsp;</td>
                                                                     </tr>
@@ -313,20 +307,20 @@
                                                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tbody>
                                                                     <tr align="left">
-                                                                        <th height="22" width="110" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
-                                                                        <th height="22" width="290" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
-                                                                        <th height="22" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Référence</th>
-                                                                        <th height="22" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Mots clés</th>
+                                                                        <th height="20" width="110" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
+                                                                        <th height="20" width="290" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
+                                                                        <th height="20" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Référence</th>
+                                                                        <th height="20" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Mots clés</th>
                                                                     </tr>
                                                                     <tr><td colspan="4" height="8"></td></tr>
 
                                                                     @if(!$arrets->isEmpty())
                                                                         @foreach($arrets as $arret)
                                                                             <tr align="left" style="font-size: 13px;">
-                                                                                <td style="padding: 5px 0;">{{ $arret->decision_at->formatLocalized('%d %B %Y') }}</td>
-                                                                                <td style="padding: 5px 0;">{{ isset($arret->categorie) ? $arret->categorie->name : '' }}</td>
-                                                                                <td style="padding: 5px 0;"><strong><a href="">{{ $arret->numero }}</a></strong></td>
-                                                                                <td style="padding: 5px 0;">Call to action</td>
+                                                                                <td style="padding: 5px 2px;">{{ $arret->decision_at->formatLocalized('%d %B %Y') }}</td>
+                                                                                <td style="padding: 5px 4px 5px 2px;">{{ isset($arret->categorie) ? $arret->categorie->name : '' }}</td>
+                                                                                <td style="padding: 5px 2px;"><strong><a href="">{{ $arret->numero }}</a></strong></td>
+                                                                                <td style="padding: 5px 2px;">Call to action</td>
                                                                             </tr>
                                                                         @endforeach
                                                                     @endif
@@ -359,8 +353,10 @@
                                                                                     <td>
                                                                                         <div class='contentEditableContainer contentTextEditable'>
                                                                                             <div class='contentEditable' style='text-align: center;color:#AAAAAA;'>
-                                                                                                <p>Ceci est une alerte email de <a style="color: #1d74ac;" href="http:// www.droitpraticien.ch"> www.droitpraticien.ch</a></p>
                                                                                                 <p>
+                                                                                                    <strong>Ceci est une alerte email de <a style="color: #1d74ac;" href="http:// www.droitpraticien.ch"> www.droitpraticien.ch</a></strong>
+                                                                                                </p>
+                                                                                                <p style="color:#585858;  margin-top: 5px;">
                                                                                                     Faculté de droit<br/>
                                                                                                     Avenue du 1er-Mars 26<br/>
                                                                                                     2000 Neuchâtel<br/>

@@ -26,6 +26,7 @@ Route::get('articles', 'ArticleController@index');
 Route::get('test', 'ArticleController@test');
 Route::get('update', 'ArticleController@update');
 Route::get('search', 'ArticleController@search');
+Route::get('abos', 'ArticleController@abos');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
