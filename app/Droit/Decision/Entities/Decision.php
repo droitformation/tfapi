@@ -26,7 +26,7 @@ class Decision extends Model
         {
             foreach($terms as $term)
             {
-                $query->whereRaw('texte  REGEXP "[[:<:]]'.$term.'[[:>:]]"');
+                $query->whereRaw('texte REGEXP "[[:<:]]'.$term.'[[:>:]]"');
             }
         };
     }
@@ -39,9 +39,14 @@ class Decision extends Model
         });
     }
 
-    public function scopePublication($query, $publish)
+    public function scopePublished($query, $publish)
     {
         if($publish) $query->where('publish', '=' ,1);
+    }
+
+    public function scopePublicationAt($query, $publication_at)
+    {
+        if($publication_at) $query->whereDate('publication_at', '=' ,$publication_at);
     }
 
     public function getPublicationListDateAttribute()

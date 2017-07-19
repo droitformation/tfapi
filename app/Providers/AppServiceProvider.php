@@ -27,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerDecisionService();
         $this->registerFailedService();
         $this->registerCategorieService();
+        $this->registerCategorieKeywordService();
+        $this->registerCategorieWorkerService();
         $this->registerAboService();
         $this->registerUserService();
         $this->registerUpdateWorkerService();
@@ -94,7 +96,20 @@ class AppServiceProvider extends ServiceProvider
             );
         });
     }
+    
+    /**
+     * CategorieKeyword
+     */
+    protected function registerCategorieKeywordService(){
 
+        $this->app->singleton('App\Droit\Categorie\Repo\CategorieKeywordInterface', function()
+        {
+            return new \App\Droit\Categorie\Repo\CategorieKeywordEloquent(
+                new \App\Droit\Categorie\Entities\Categorie_keyword()
+            );
+        });
+    }
+    
     /**
      * Update Worker
      */
@@ -125,6 +140,22 @@ class AppServiceProvider extends ServiceProvider
             );
         });
     }
+
+    /**
+     * Categorie Worker
+     */
+    protected function registerCategorieWorkerService(){
+
+        $this->app->singleton('App\Droit\Categorie\Worker\CategorieWorkerInterface', function()
+        {
+            return new \App\Droit\Categorie\Worker\CategorieWorker(
+                \App::make('App\Droit\Categorie\Repo\CategorieKeywordInterface'),
+                \App::make('App\Droit\Decision\Repo\DecisionInterface')
+            );
+        });
+    }
+
+
 
     /**
      * Search Worker

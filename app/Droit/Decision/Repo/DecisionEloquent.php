@@ -41,13 +41,21 @@ class DecisionEloquent implements DecisionInterface{
         return !$found->isEmpty() ? $found->first() : false;
     }
 
-    public function search($terms = null, $categorie = null, $publish = null)
+    // $params array terms, categorie, published, publications_at
+
+    public function search($params)
     {
-       return $this->decision->with(['categorie'])
+        $terms = isset($params['terms']) ? $params['terms'] : null;
+        $categorie = isset($params['categorie']) ? $params['categorie'] : null;
+        $published = isset($params['published']) ? $params['published'] : null;
+        $publication_at = isset($params['publication_at']) ? $params['publication_at'] : null;
+
+        return $this->decision->with(['categorie'])
            ->search($terms)
            ->categorie($categorie)
-           ->publication($publish)
-           ->toSql();
+           ->published($published)
+           ->publicationAt($publication_at)
+           ->get();
     }
 
     public function create(array $data){

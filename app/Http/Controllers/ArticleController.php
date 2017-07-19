@@ -97,24 +97,10 @@ class ArticleController extends Controller
 
         $repo_dec   = App::make('App\Droit\Decision\Repo\DecisionInterface');
         $repo   = App::make('App\Droit\User\Repo\UserInterface');
-        $user = $repo->find(1);
+        $repo_k   = App::make('App\Droit\Categorie\Repo\CategorieKeywordInterface');
+        $keywords = $repo_k->getAll();
 
-        $decision = factory(\App\Droit\Decision\Entities\Decision::class)->make([
-            'texte' =>
-                '<div>Dapibus ante accumasa laoreet mauris nostra torquenté blandît néc lobortis duèis, ùrci fringilla taciti senectus malésdum félis morbié 
-                suscipit dictumst métus, çunc himenaéos namé primis ultrûcéas anonyma lilitoxic cras dictum. Nombre phaséllœs nîbh fuscé Frînglilia égét 
-                eu sit in quam lobortïs phasellus pellentesque lorém arcû in quisqué éuismod metus enim imperdiet egéstat ligula àc voluptà torquent sapien 
-                placérat liçlà à, nullä ultrices Assurance de Protection Juridique SA égét 44 395€ dapidûs quisque à nullä dui congue ïpsum séd léo séd hac.
-                Conges quém mattis sènèctus malesuada énis aliquet dictum ullamcorper d\'accumasa à porta conséquat, lobortis convallis èiam condimentum lacinia vulputaté
-                ïn metus litora sit vulputaté vélit, consequat liçlà</div>.
 
-                <div>Morbi phasellus c\'est torquenté malésdum aptenté l\'2 068€ duis sem fancibüs classé d\'adipiscing duis, rutrum malésdum elementum mi est 
-                velit faucibus élémentum interdum nequé congue ?
-                leçtus, bibéndum pharetra bibéndum urna bibéndum aptenté sagittis énis molestie vehicula non interdùm, vehiculâ suscipit alèquam. Lorem ad 
-                quîs j\'libéro pharétra vivamus mollis ultricités ut, vulputaté ac pulvinar èst commodo aenanm pharétra cubilia, lacus aenean pharetra des 
-                ïd quisquées mauris varius sit. Mie dictumst nûllam çurcus molestié imperdiet vestibulum suspendisse tempor habitant sit pélléntésque sit 
-                çunc, primiés?</div>',
-        ]);
      /*   $user = factory(\App\Droit\User\Entities\User::class)->create();
         $abo = factory(\App\Droit\Abo\Entities\Abo::class)->create([
             'user_id'  => $user->id,
@@ -139,8 +125,20 @@ class ArticleController extends Controller
             return $keywods->pluck('keywords_list')->flatten();
         });
 */
+
+
+        $decision = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'texte' =>
+                '<div>Dapibus à nul LLCA de Protection Juridique SA égét 44 3€ dapidûs quisque à nullä dui cctus malet, consequat liçlà</div>.'
+        ]);
+
+
+        $worker = App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
+
+        $array = $worker->process($decision);
+
         echo '<pre>';
-        print_r($user);
+        print_r($array);
         echo '</pre>';exit();
 
         foreach ($user->abos as $abo){
