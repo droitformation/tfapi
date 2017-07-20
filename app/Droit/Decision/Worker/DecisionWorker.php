@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Droit\Decision\Worker\DecisionWorkerInterface;
 use App\Droit\Decision\Repo\DecisionInterface;
+use App\Droit\Categorie\Worker\CategorieWorkerInterface;
+
 use App\Droit\Bger\Utility\Decision;
 use App\Droit\Bger\Utility\Liste;
 use Illuminate\Support\Collection;
@@ -13,14 +15,16 @@ class DecisionWorker implements DecisionWorkerInterface
 
     protected $repo;
     protected $decision;
+    protected $worker;
     protected $liste;
 
     public $missing_dates;
 
-    public function __construct(DecisionInterface $repo, Decision $decision, Liste $liste)
+    public function __construct(DecisionInterface $repo, CategorieWorkerInterface $worker, Decision $decision, Liste $liste)
     {
         $this->repo = $repo;
         $this->decision = $decision;
+        $this->worker = $worker;
         $this->liste = $liste;
     }
 
@@ -52,6 +56,9 @@ class DecisionWorker implements DecisionWorkerInterface
                 $decisions->map(function ($decision) {
                     dispatch(new \App\Jobs\InsertDecision($decision));
                 });
+
+                // Attach eventuals categorie for special keywords
+                $this->worker->process($date);
 
                 \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des décisions terminées '.$date));
             }

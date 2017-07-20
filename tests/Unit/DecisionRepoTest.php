@@ -99,8 +99,7 @@ class DecisionRepoTest extends TestCase
 
         $decision2 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
             'publication_at' => $date,
-            'texte' =>
-                '<div>Dapibus à nul Assurance de Protection Juridique SA égét 44 3€ dapidûs quisque à nullä dui cctus malet, consequat liçlà</div>.'
+            'texte' => '<div>Dapibus à nul Assurance de Protection Juridique SA égét 44 3€ dapidûs quisque à nullä dui cctus malet, consequat liçlà</div>.'
         ]);
 
         $repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
@@ -113,5 +112,110 @@ class DecisionRepoTest extends TestCase
         // We found only the first one, it contains all keywords
         $this->assertTrue($results->contains('id',$decision->id));
         $this->assertEquals(1,$results->count());
+    }
+
+    public function testSearchKeywordInNewDecisisons()
+    {
+        $date = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+
+        // Control
+        $decision1 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus ante accumasa laoreelentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'
+        ]);
+
+        // BGFA => categorie 244
+        $decision2 =  factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus à nul A égét 44 3€ BGFA quisque à nullä dui cctus malet, consequat liçlà</div>.'
+        ]);
+
+        // LLCA => categorie 244
+        $decision3 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus à nul de LLCA de chose égét 44 3€ quisque à nullä dui cctus malet, consequat liçlà</div>.'
+        ]);
+
+        // "Assistance judiciaire", CPC => categorie 207
+        $decision4 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus à nul de Assistance judiciaire égét 44 3€ quisque à nullä dui cctus CPC, consequat liçlà</div>.'
+        ]);
+
+        $worker = \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
+
+        $results = $worker->find($date); // $date => publication_at
+
+        // We found decisison for both categories for the date
+        $this->assertTrue(!$results->get(244)->isEmpty());
+        $this->assertTrue(!$results->get(207)->isEmpty());
+
+        $this->assertEquals(2,$results->get(244)->count());
+        $this->assertEquals(1,$results->get(207)->count());
+    }
+
+    public function testAttachOtherCategorieForDecision()
+    {
+        $date = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+
+        // Control
+        $decision1 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus ante accumasa laoreelentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'
+        ]);
+
+        // BGFA => categorie 244
+        $decision2 =  factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus à nul A égét 44 3€ BGFA quisque à nullä dui cctus malet, consequat liçlà</div>.'
+        ]);
+
+        // LLCA => categorie 244
+        $decision3 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus à nul de LLCA de chose égét 44 3€ quisque à nullä dui cctus malet, consequat liçlà</div>.'
+        ]);
+
+        // "Assistance judiciaire", CPC => categorie 207
+        $decision4 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus à nul de Assistance judiciaire égét 44 3€ quisque à nullä dui cctus CPC, consequat liçlà</div>.'
+        ]);
+
+        $worker = \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
+
+        $worker->process($date); // $date => publication_at
+
+        $decision1->fresh();
+        $decision2->fresh();
+        $decision3->fresh();
+        $decision4->fresh();
+
+        $this->assertFalse($decision1->other_categories->contains('id',244));
+        $this->assertFalse($decision1->other_categories->contains('id',207));
+
+        $this->assertTrue($decision2->other_categories->contains('id',244));
+        $this->assertTrue($decision3->other_categories->contains('id',244));
+        $this->assertTrue($decision4->other_categories->contains('id',207));
+    }
+
+    public function testOtherCategorieForDecisionNotFound()
+    {
+        $date = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+
+        // Control
+        $decision1 = factory(\App\Droit\Decision\Entities\Decision::class)->create([
+            'publication_at' => $date,
+            'texte' => '<div>Dapibus ante accumasa laoreelentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'
+        ]);
+
+        $worker = \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
+
+        $worker->process($date); // $date => publication_at
+
+        $decision1->fresh();
+
+        $this->assertFalse($decision1->other_categories->contains('id',244));
+        $this->assertFalse($decision1->other_categories->contains('id',207));
     }
 }

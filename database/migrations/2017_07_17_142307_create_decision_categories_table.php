@@ -27,6 +27,6 @@ class CreateDecisionCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keyword_categories');
+        Schema::dropIfExists('decision_categories');
     }
 }

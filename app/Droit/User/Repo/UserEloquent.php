@@ -24,7 +24,10 @@ class UserEloquent implements UserInterface{
 
     public function getByCadence($cadence)
     {
-        return $this->user->with(['abos','published'])->where('cadence','=',$cadence)->whereDate('active_until', '>', \Carbon\Carbon::today()->startOfDay())->get();
+        return $this->user->with(['abos','published'])
+            ->where('cadence','=',$cadence)
+            ->whereDate('active_until', '>', \Carbon\Carbon::today()->startOfDay())
+            ->get();
     }
     
     public function create(array $data)

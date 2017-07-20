@@ -13,6 +13,7 @@ class DecisionWorkerTest extends TestCase
     protected $decision;
     protected $list;
     protected $repo;
+    protected $worker;
 
     public function setUp()
     {
@@ -21,7 +22,7 @@ class DecisionWorkerTest extends TestCase
         $this->decision = \Mockery::mock('App\Droit\Bger\Utility\Decision');
         $this->list = \Mockery::mock('App\Droit\Bger\Utility\Liste');
         $this->repo = \Mockery::mock('App\Droit\Decision\Repo\DecisionInterface');
-
+        $this->worker = \Mockery::mock('App\Droit\Categorie\Worker\CategorieWorkerInterface');
     }
 
     public function tearDown()
@@ -56,14 +57,14 @@ class DecisionWorkerTest extends TestCase
         $this->list->shouldReceive('getList')->once()->andReturn(dates_range(3));
         // repo missing dates
         $this->repo->shouldReceive('getMissingDates')->once()->andReturn(dates_range(3));
-
-        // missing dates empty send mail
+        // Special keywords process for each dates
+        $this->worker->shouldReceive('process')->times(3);
 
         // list set url with date, getListDecisions
         $this->list->shouldReceive('setUrl')->times(3)->andReturn($this->list);
         $this->list->shouldReceive('getListDecisions')->andReturn(collect($decisions));
 
-        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->decision,$this->list);
+        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->worker,$this->decision,$this->list);
         $worker->setMissingDates()->update();
 
       // dispatch App\Jobs\InsertDecision x nbr of decision
@@ -85,7 +86,7 @@ class DecisionWorkerTest extends TestCase
         // repo missing dates
         $this->repo->shouldReceive('getMissingDates')->once()->andReturn([]);
 
-        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->decision,$this->list);
+        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->worker,$this->decision,$this->list);
         $worker->setMissingDates()->update();
 
         // missing dates empty send mail
@@ -103,7 +104,7 @@ class DecisionWorkerTest extends TestCase
         $this->repo->shouldReceive('getMissingDates')->once()->andReturn($collection_dates);
 
         // Create a decision worker instance with mocked dependencies
-        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->decision,$this->list);
+        $worker = new \App\Droit\Decision\Worker\DecisionWorker($this->repo,$this->worker,$this->decision,$this->list);
         $worker->setMissingDates($collection_dates);
 
         // missing dates should be the same as passed

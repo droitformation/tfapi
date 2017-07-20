@@ -58,4 +58,9 @@ class Decision extends Model
     {
         return $this->belongsTo('App\Droit\Categorie\Entities\Categorie');
     }
+
+    public function other_categories()
+    {
+        return $this->belongsToMany('App\Droit\Categorie\Entities\Categorie','decision_categories','decision_id','categorie_id');
+    }
 }

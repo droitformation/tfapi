@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Droit\Bger\Worker\UpdateInterface;
 use App\Droit\Decision\Repo\DecisionInterface;
 use Illuminate\Support\Facades\App;
 
 class ArticleController extends Controller
 {
-    protected $update;
     protected $decision;
 
-    public function __construct(UpdateInterface $update, DecisionInterface $decision)
+    public function __construct( DecisionInterface $decision)
     {
-        $this->update = $update;
         $this->decision = $decision;
     }
 
@@ -84,9 +81,10 @@ class ArticleController extends Controller
     public function test()
     {
         setlocale(LC_ALL, 'fr_FR.UTF-8');
-
-        $repo   = App::make('App\Droit\Decision\Repo\DecisionInterface');
-        $arrets = $repo->getAll()->take(5);
+        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+        $alert  = App::make('App\Droit\Bger\Worker\AlertInterface');
+        $alert->setCadence('daily')->setDate($publication_at);
+        $arrets = $alert->getUsers();
 /*        echo '<pre>';
         print_r($arrets);
         echo '</pre>';exit();*/
@@ -98,54 +96,35 @@ class ArticleController extends Controller
         $repo_dec   = App::make('App\Droit\Decision\Repo\DecisionInterface');
         $repo   = App::make('App\Droit\User\Repo\UserInterface');
         $repo_k   = App::make('App\Droit\Categorie\Repo\CategorieKeywordInterface');
-        $keywords = $repo_k->getAll();
+        $user = $repo->find(2);
 
 
-     /*   $user = factory(\App\Droit\User\Entities\User::class)->create();
-        $abo = factory(\App\Droit\Abo\Entities\Abo::class)->create([
+/*        $user = factory(\App\Droit\User\Entities\User::class)->create();
+        $abo  = factory(\App\Droit\Abo\Entities\Abo::class)->create([
             'user_id'  => $user->id,
-            'keywords' => '"Assurance de Protection Juridique SA"',
+            'keywords' => '"autorité de chose jugée"',
         ]);
 
         $abo1 = factory(\App\Droit\Abo\Entities\Abo::class)->create([
             'user_id'  => $user->id,
-            'keywords' => '"recours en matière civile","canton de Genève"',
-        ]);*/
-
-// KeywordsList
-
-        $found = $repo_dec->search(['Katholische Kirchgemeinde Luzern'],184,1);
-
-        /*
-               echo '<pre>';
-                print_r($found);
-                echo '</pre>';exit(); */
-
-     /*   $keywords = $user->abos->groupBy('categorie_id')->map(function($keywods){
-            return $keywods->pluck('keywords_list')->flatten();
-        });
-*/
-
-
-        $decision = factory(\App\Droit\Decision\Entities\Decision::class)->create([
-            'texte' =>
-                '<div>Dapibus à nul LLCA de Protection Juridique SA égét 44 3€ dapidûs quisque à nullä dui cctus malet, consequat liçlà</div>.'
+            'keywords' => '"Protection Juridique SA","LLCA"',
         ]);
 
+        $abo1 = factory(\App\Droit\Abo\Entities\Abo::class)->create([
+            'user_id'      => $user->id,
+            'keywords'     => null,
+            'categorie_id' => 244,
+        ]);*/
 
-        $worker = App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
 
-        $array = $worker->process($decision);
+        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+        $alert  = App::make('App\Droit\Bger\Worker\AlertInterface');
+        $alert->setCadence('daily')->setDate($publication_at);
+        $result = $alert->getUsers();
 
         echo '<pre>';
-        print_r($array);
-        echo '</pre>';exit();
-
-        foreach ($user->abos as $abo){
-            echo '<pre>';
-            print_r($abo->load('published'));
-            echo '</pre>';
-        }
-
+        //print_r($user->abonnements);
+        print_r($result);
+        echo '</pre>';
     }
 }

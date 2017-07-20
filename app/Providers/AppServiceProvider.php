@@ -31,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
         $this->registerCategorieWorkerService();
         $this->registerAboService();
         $this->registerUserService();
-        $this->registerUpdateWorkerService();
         $this->registerDecisionWorkerService();
         $this->registerAlertWorkerService();
     }
@@ -109,22 +108,6 @@ class AppServiceProvider extends ServiceProvider
             );
         });
     }
-    
-    /**
-     * Update Worker
-     */
-    protected function registerUpdateWorkerService(){
-
-        $this->app->singleton('App\Droit\Bger\Worker\UpdateInterface', function()
-        {
-            return new \App\Droit\Bger\Worker\Update(
-                \App::make('App\Droit\Decision\Repo\DecisionInterface'),
-                new \App\Droit\Bger\Utility\Decision(),
-                new \App\Droit\Bger\Utility\Dispatch(),
-                new \App\Droit\Bger\Utility\Clean()
-            );
-        });
-    }
 
     /**
      * Decision Worker
@@ -135,6 +118,7 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Droit\Decision\Worker\DecisionWorker(
                 \App::make('App\Droit\Decision\Repo\DecisionInterface'),
+                \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface'),
                 new \App\Droit\Bger\Utility\Decision(),
                 new \App\Droit\Bger\Utility\Liste()
             );
@@ -180,7 +164,7 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Droit\Bger\Worker\Alert(
                 \App::make('App\Droit\Decision\Repo\DecisionInterface'),
-                new \App\Droit\Bger\Utility\Clean()
+                \App::make('App\Droit\User\Repo\UserInterface')
             );
         });
     }

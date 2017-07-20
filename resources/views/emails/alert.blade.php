@@ -316,12 +316,24 @@
 
                                                                     @if(!$arrets->isEmpty())
                                                                         @foreach($arrets as $arret)
-                                                                            <tr align="left" style="font-size: 13px;">
-                                                                                <td style="padding: 5px 2px;">{{ $arret->decision_at->formatLocalized('%d %B %Y') }}</td>
-                                                                                <td style="padding: 5px 4px 5px 2px;">{{ isset($arret->categorie) ? $arret->categorie->name : '' }}</td>
-                                                                                <td style="padding: 5px 2px;"><strong><a href="">{{ $arret->numero }}</a></strong></td>
-                                                                                <td style="padding: 5px 2px;">Call to action</td>
-                                                                            </tr>
+                                                                            <!--
+                                                                            list keys :
+                                                                            decisisons => collection
+                                                                            categorie => int
+                                                                            keywords => collection
+                                                                             -->
+                                                                            @foreach($arret['decisisons'] as $decisison)
+                                                                                <tr align="left" style="font-size: 13px;">
+                                                                                    <td style="padding: 5px 2px;">{{ $decisison->decision_at->formatLocalized('%d %B %Y') }}</td>
+                                                                                    <td style="padding: 5px 4px 5px 2px;">{{ isset($decisison->categorie) ? $decisison->categorie->name : '' }}</td>
+                                                                                    <td style="padding: 5px 2px;"><strong><a href="">{{ $decisison->numero }}</a></strong></td>
+                                                                                    <td style="padding: 5px 2px;">
+                                                                                        @if(isset($arret['keywords']) && !$arret['keywords']->isEmpty())
+                                                                                            {{ $arret['keywords']->implode(',') }}
+                                                                                        @endif
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforeach
                                                                         @endforeach
                                                                     @endif
 
