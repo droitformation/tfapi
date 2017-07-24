@@ -25,7 +25,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Support/helpers.php"
+            "app/Support/helpers.php",
+            "tests/factories/ObjectFactory.php"
         ]
     },
     "autoload-dev": {

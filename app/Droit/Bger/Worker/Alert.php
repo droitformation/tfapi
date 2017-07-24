@@ -51,26 +51,40 @@ class Alert implements AlertInterface
         $abos = $this->user->getByCadence($this->cadence);
 
         return $abos->map(function($user){
-            return $user->abonnements->map(function($list,$categorie_id){
+
+            $results = $user->abonnements->map(function($list,$categorie_id){
                 // list keys:  keywords => collection, published => bool
                 $keywords  = $list['keywords'];
                 $published = $list['published'];
 
-                return $results = $keywords->map(function($keyword) use ($categorie_id,$published){
-                    $keyword = !$keyword->isEmpty() ? $keyword : null;
-
-                    $found = $this->decision->search(['terms' => $keyword, 'categorie' => $categorie_id, 'published' => $published, 'publication_at' => $this->publication_at]);
-                    $found = !$found->isEmpty() ? $found : null;
-
-                    if($found){
-                        return ['decisisons' => $found, 'categorie' => $categorie_id, 'keywords' => $keyword];
-                    }
-
-                    return false;
+                return $keywords->map(function($keyword) use ($categorie_id,$published){
+                    return $this->findDecision($keyword,$categorie_id,$published);
+                })->reject(function($item){
+                    return $item['decisions']->isEmpty();
                 });
+
+            })->reject(function($item){
+                return $item->isEmpty();
             });
-        })->flatten(2)->reject(function($item){
-            return empty($item);
+
+            return ['user' => $user, 'abos' => $results->flatten(1)];
+
+        })->reject(function($item){
+            return $item['abos']->isEmpty();
         });
+    }
+
+    public function findDecision($keyword,$categorie_id,$published)
+    {
+        $keyword = isset($keyword) && !$keyword->isEmpty() ? $keyword : null;
+
+        $found = $this->decision->search(['terms' => array_filter($keyword->toArray()), 'categorie' => $categorie_id, 'published' => $published, 'publication_at' => $this->publication_at]);
+
+        return ['decisions' => $found, 'categorie' => $categorie_id, 'keywords' => $keyword];
+    }
+
+    public function sent($abo)
+    {
+        return \App\Droit\Bger\Entities\Alert_sent::create(['user_id' => $abo->id, 'publication_at' => $this->publication_at]);
     }
 }

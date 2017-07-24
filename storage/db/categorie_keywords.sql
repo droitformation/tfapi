@@ -25,7 +25,7 @@ INSERT INTO `categorie_keywords` (`id`, `categorie_id`, `keywords`) VALUES
 (2, 244, 'BGFA'),
 (3, 207, 'procédure civile'),
 (4, 207, 'cas clairs'),
-(5, 207, 'P"rocédure de divorce"'),
+(5, 207, '"Procédure de divorce"'),
 (6, 207, 'Procédure, CPC'),
 (7, 207, 'Compétence, CPC'),
 (8, 207, '"Assistance judiciaire", CPC'),

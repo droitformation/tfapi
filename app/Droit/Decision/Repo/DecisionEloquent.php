@@ -42,10 +42,9 @@ class DecisionEloquent implements DecisionInterface{
     }
 
     // $params array terms, categorie, published, publications_at
-
     public function search($params)
     {
-        $terms = isset($params['terms']) ? $params['terms'] : null;
+        $terms     = isset($params['terms']) && !empty($params['terms']) ? $params['terms'] : null;
         $categorie = isset($params['categorie']) ? $params['categorie'] : null;
         $published = isset($params['published']) ? $params['published'] : null;
         $publication_at = isset($params['publication_at']) ? $params['publication_at'] : null;

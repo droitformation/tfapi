@@ -11,7 +11,7 @@ class AboEloquent implements AboInterface{
 
     public function __construct(M $abo, P $publish)
     {
-        $this->abo = $abo;
+        $this->abo     = $abo;
         $this->publish = $publish;
     }
 

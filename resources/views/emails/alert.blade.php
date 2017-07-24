@@ -279,9 +279,9 @@
                                                                                 <tr>
                                                                                     <td>
                                                                                         <div class='contentEditable' style='text-align: center;'>
-                                                                                            <h2 style="font-size: 18px;">Bonjour Cindy Admin Leschaud</h2>
+                                                                                            <h2 style="font-size: 18px;">Bonjour {{ $user->name }}</h2>
                                                                                             <p style="color:#585858; margin-bottom: 5px; margin-top: 5px;">Voici les derniers arrêts correspondant à vos abonnements</p>
-                                                                                            <p><strong>Date de publication 14 juillet 2017</strong></p>
+                                                                                            <p><strong>Date de publication {{ $date->formatLocalized('%d %B %Y') }}</strong></p>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -307,23 +307,18 @@
                                                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tbody>
                                                                     <tr align="left">
-                                                                        <th height="20" width="110" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
-                                                                        <th height="20" width="290" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
-                                                                        <th height="20" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Référence</th>
-                                                                        <th height="20" width="90" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 12px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Mots clés</th>
+                                                                        <th height="20" width="100" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
+                                                                        <th height="20" width="280" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
+                                                                        <th height="20" width="85" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Référence</th>
+                                                                        <th height="20" width="115" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Mots clés</th>
                                                                     </tr>
                                                                     <tr><td colspan="4" height="8"></td></tr>
 
                                                                     @if(!$arrets->isEmpty())
                                                                         @foreach($arrets as $arret)
-                                                                            <!--
-                                                                            list keys :
-                                                                            decisisons => collection
-                                                                            categorie => int
-                                                                            keywords => collection
-                                                                             -->
-                                                                            @foreach($arret['decisisons'] as $decisison)
-                                                                                <tr align="left" style="font-size: 13px;">
+                                                                            <!--  list keys :  decisisons => collection, categorie => int,  keywords => collection  -->
+                                                                            @foreach($arret['decisions'] as $decisison)
+                                                                                <tr align="left" style="font-size: 12px;">
                                                                                     <td style="padding: 5px 2px;">{{ $decisison->decision_at->formatLocalized('%d %B %Y') }}</td>
                                                                                     <td style="padding: 5px 4px 5px 2px;">{{ isset($decisison->categorie) ? $decisison->categorie->name : '' }}</td>
                                                                                     <td style="padding: 5px 2px;"><strong><a href="">{{ $decisison->numero }}</a></strong></td>

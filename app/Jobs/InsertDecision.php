@@ -31,9 +31,9 @@ class InsertDecision implements ShouldQueue
      */
     public function handle()
     {
-        $repo   = \App::make('App\Droit\Decision\Repo\DecisionInterface');
-        $worker = \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
-        $failed = \App::make('App\Droit\Decision\Repo\FailedInterface');
+        $repo      = \App::make('App\Droit\Decision\Repo\DecisionInterface');
+        $categorie = \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface');
+        $failed    = \App::make('App\Droit\Decision\Repo\FailedInterface');
 
         $worker = new \App\Droit\Bger\Utility\Decision();
 
@@ -43,7 +43,7 @@ class InsertDecision implements ShouldQueue
             $new = $repo->create($data);
 
             // test if decisiosn with keywords for droit des avocats
-            $worker->process($new);
+            $categorie->process($new);
         }
         else{
             $failed->create(['publication_at' => $data['publication_at'], 'numero' => $data['numero']]);
