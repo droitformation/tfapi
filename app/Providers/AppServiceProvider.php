@@ -118,6 +118,7 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Droit\Decision\Worker\DecisionWorker(
                 \App::make('App\Droit\Decision\Repo\DecisionInterface'),
+                \App::make('App\Droit\Decision\Repo\FailedInterface'),
                 \App::make('App\Droit\Categorie\Worker\CategorieWorkerInterface'),
                 new \App\Droit\Bger\Utility\Decision(),
                 new \App\Droit\Bger\Utility\Liste()

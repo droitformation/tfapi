@@ -48,9 +48,12 @@ class Alert implements AlertInterface
 
     public function getUsers()
     {
-        $abos = $this->user->getByCadence($this->cadence);
+        $abos    = $this->user->getByCadence($this->cadence);
+        $already = $this->alreadySent();
 
-        return $abos->map(function($user){
+        return $abos->reject(function ($item, $key) use ($already){
+                return $already->contains('user_id', $item->id);
+            })->map(function($user){
 
             $results = $user->abonnements->map(function($list,$categorie_id){
                 // list keys:  keywords => collection, published => bool
@@ -83,8 +86,13 @@ class Alert implements AlertInterface
         return ['decisions' => $found, 'categorie' => $categorie_id, 'keywords' => $keyword];
     }
 
-    public function sent($abo)
-    {
+    public function sent($abo){
+
         return \App\Droit\Bger\Entities\Alert_sent::create(['user_id' => $abo->id, 'publication_at' => $this->publication_at]);
+    }
+
+    public function alreadySent(){
+
+        return \App\Droit\Bger\Entities\Alert_sent::whereDate('publication_at', $this->publication_at)->get();
     }
 }

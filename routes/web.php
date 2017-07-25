@@ -13,7 +13,6 @@
 
 Route::get('/', function () {
 
-    $update = App::make('App\Droit\Bger\Worker\UpdateInterface');
     $model = App::make('App\Droit\Decision\Repo\DecisionInterface');
 
     $expect = ['sicherheit','autre mot ici','tribunal'];

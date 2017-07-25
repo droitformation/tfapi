@@ -281,7 +281,7 @@
                                                                                         <div class='contentEditable' style='text-align: center;'>
                                                                                             <h2 style="font-size: 18px;">Bonjour {{ $user->name }}</h2>
                                                                                             <p style="color:#585858; margin-bottom: 5px; margin-top: 5px;">Voici les derniers arrêts correspondant à vos abonnements</p>
-                                                                                            <p><strong>Date de publication {{ $date->formatLocalized('%d %B %Y') }}</strong></p>
+                                                                                            <p><strong>Date de publication {{ $date }}</strong></p>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -307,8 +307,8 @@
                                                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tbody>
                                                                     <tr align="left">
-                                                                        <th height="20" width="100" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
-                                                                        <th height="20" width="280" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
+                                                                        <th height="20" width="105" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Date décision</th>
+                                                                        <th height="20" width="275" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Catégorie</th>
                                                                         <th height="20" width="85" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Référence</th>
                                                                         <th height="20" width="115" style="color: #fff; font-weight: normal; background: #0f4060; border: 1px solid #fff; font-size: 11px; text-transform: uppercase; padding: 5px 4px 4px 4px;">Mots clés</th>
                                                                     </tr>

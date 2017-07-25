@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\UpdateDecisions::class,
+        \App\Console\Commands\SendAlert::class,
     ];
 
     /**

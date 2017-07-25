@@ -16,7 +16,7 @@ class CreateFailedUpdateTable extends Migration
         Schema::create('failed_update', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('publication_at');
-            $table->string('numero');
+            $table->string('numero')->nullable();
             $table->timestamps();
         });
     }

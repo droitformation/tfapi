@@ -34,6 +34,20 @@ class DecisionRepoTest extends TestCase
         $this->assertSame($results->numero,$decision->numero);
     }
 
+    public function testGetDatesMissing()
+    {
+        $today = \Carbon\Carbon::today();
+
+        $decision1 = factory(\App\Droit\Decision\Entities\Decision::class)->create(['numero' => '4A_123/2017','publication_at' => $today]);
+        $decision2 = factory(\App\Droit\Decision\Entities\Decision::class)->create(['numero' => '4A_123/2017','publication_at' => $today->addDay(1)]);
+
+        $repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
+
+        $results = $repo->getMissingDates([$today->addDay(1),$today,$today->addDays(2)]);
+
+        $this->assertEquals(1,$results->count());
+    }
+
     public function testSearchParams()
     {
         $date = \Carbon\Carbon::today()->toDateTimeString();

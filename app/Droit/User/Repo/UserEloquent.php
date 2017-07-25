@@ -39,8 +39,7 @@ class UserEloquent implements UserInterface{
             'password'   => bcrypt($data['password']),
         ));
 
-        if( ! $user )
-        {
+        if( ! $user ){
             return false;
         }
 

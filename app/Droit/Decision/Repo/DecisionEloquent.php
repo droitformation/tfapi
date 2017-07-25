@@ -26,7 +26,7 @@ class DecisionEloquent implements DecisionInterface{
     {
         $exist = $this->decision->select('publication_at')->whereIn('publication_at', $dates)->get();
 
-        return array_diff($dates, $exist->pluck('publication_at')->all());
+        return collect(array_diff($dates, $exist->pluck('publication_at')->all()))->unique();
     }
     
     public function find($id){

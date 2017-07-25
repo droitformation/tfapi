@@ -20,8 +20,8 @@ class FailedEloquent implements FailedInterface{
     public function create(array $data){
 
         $failed = $this->failed->create(array(
-            'publication_at' => $data['publication_at'],
-            'numero'         => $data['numero'],
+            'publication_at' => isset($data['publication_at']) ? $data['publication_at'] : \Carbon\Carbon::now()->toDateTimeString(),
+            'numero'         => isset($data['numero']) ? $data['numero'] : 'oho',
             'created_at'     => \Carbon\Carbon::now(),
             'updated_at'     => \Carbon\Carbon::now()
         ));

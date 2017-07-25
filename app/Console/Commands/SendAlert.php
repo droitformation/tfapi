@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class UpdateDecisions extends Command
+class SendAlert extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'update:decision';
+    protected $signature = 'send:alert {cadence}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update decisisons list from TF CH';
+    protected $description = 'Send alert for decisions';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,8 @@ class UpdateDecisions extends Command
      */
     public function handle()
     {
-        dispatch(new \App\Jobs\UpdateDateDecisions());
+        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+
+        dispatch(new \App\Jobs\SendEmailAlert($publication_at, $this->argument('cadence')));
     }
 }
