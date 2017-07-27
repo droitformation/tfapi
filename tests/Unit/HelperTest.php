@@ -24,6 +24,30 @@ class HelperTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function testFormatDateOrRange()
+    {
+        $date = '2017-07-25';
+
+        $expected = '25 juillet 2017';
+        $result = formatDateOrRange($date);
+
+        $this->assertEquals($expected,$result);
+
+        $date = ['2017-07-23','2017-07-24','2017-07-25'];
+
+        $expected = '23 au 25 juillet 2017';
+        $result = formatDateOrRange($date);
+
+        $this->assertEquals($expected,$result);
+
+        $date = ['2017-06-30','2017-07-01','2017-07-02'];
+
+        $expected = '30 juin au 02 juillet 2017';
+        $result = formatDateOrRange($date);
+
+        $this->assertEquals($expected,$result);
+    }
+
     public function testDateIsValid()
     {
         // True

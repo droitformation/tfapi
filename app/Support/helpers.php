@@ -20,6 +20,36 @@ function dates_range($nbr){
     });
 }
 
+function generateDateRange($start_date, $end_date)
+{
+    $dates = [];
+
+    for($date = $start_date; $date->lte($end_date); $date->addDay()) {
+        $dates[] = $date->toDateTimeString();
+    }
+
+    return $dates;
+}
+
+function formatDateOrRange($date){
+
+    setlocale(LC_ALL, 'fr_FR.UTF-8');
+
+    if(is_array($date)){
+        $start = array_shift($date);
+        $end   = array_pop($date);
+
+        $start = \Carbon\Carbon::parse($start);
+        $end   = \Carbon\Carbon::parse($end);
+
+        $format = $start->month == $end->month ? '%d' : '%d %B';
+
+        return $start->formatLocalized($format).' au '.$end->formatLocalized('%d %B %Y');;
+    }
+
+    return \Carbon\Carbon::parse($date)->formatLocalized('%d %B %Y');
+}
+
 function extractParams($string){
 
     preg_match_all('/([^?&=#]+)=([^&#]*)/',$string, $match);

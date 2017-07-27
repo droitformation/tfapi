@@ -37,6 +37,17 @@ class SendAlert extends Command
      */
     public function handle()
     {
+        $today = \Carbon\Carbon::today();
+
+        if($today->dayOfWeek == 5){
+            $monday = $today->startOfWeek();
+            $friday = $today->startOfWeek()->parse('this friday');
+
+            $publication_at = generateDateRange($monday, $friday);
+
+            dispatch(new \App\Jobs\SendEmailAlert($publication_at, $this->argument('cadence')));
+        }
+
         $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
 
         dispatch(new \App\Jobs\SendEmailAlert($publication_at, $this->argument('cadence')));

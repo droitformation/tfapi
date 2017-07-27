@@ -88,11 +88,15 @@ class Alert implements AlertInterface
 
     public function sent($abo){
 
-        return \App\Droit\Bger\Entities\Alert_sent::create(['user_id' => $abo->id, 'publication_at' => $this->publication_at]);
+        $date = !is_array($this->publication_at) ? $this->publication_at : array_pop($this->publication_at);
+
+        return \App\Droit\Bger\Entities\Alert_sent::create(['user_id' => $abo->id, 'publication_at' => $date]);
     }
 
     public function alreadySent(){
 
-        return \App\Droit\Bger\Entities\Alert_sent::whereDate('publication_at', $this->publication_at)->get();
+        $date = !is_array($this->publication_at) ? $this->publication_at : array_pop($this->publication_at);
+
+        return \App\Droit\Bger\Entities\Alert_sent::whereDate('publication_at', $date)->get();
     }
 }

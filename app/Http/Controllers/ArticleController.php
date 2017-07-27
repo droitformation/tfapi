@@ -148,7 +148,24 @@ class ArticleController extends Controller
 
     public function abos(){
 
+        $today = \Carbon\Carbon::today();
+        //$today = \Carbon\Carbon::parse('this sunday');
 
+        //print_r($today->dayOfWeek);
+
+        if($today->isWeekday()){
+
+
+            $monday = $today->startOfWeek();
+            $friday = $today->startOfWeek()->parse('this friday');
+
+            $range = generateDateRange($monday, $friday);
+
+            echo '<pre>';
+            print_r($range);
+            echo '</pre>';exit();
+        }
+        exit;
 
         /*   $repo_dec   = App::make('App\Droit\Decision\Repo\DecisionInterface');
         $repo   = App::make('App\Droit\User\Repo\UserInterface');
