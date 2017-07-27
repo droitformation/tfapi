@@ -148,25 +148,6 @@ class ArticleController extends Controller
 
     public function abos(){
 
-        $today = \Carbon\Carbon::today();
-        //$today = \Carbon\Carbon::parse('this sunday');
-
-        //print_r($today->dayOfWeek);
-
-        if($today->isWeekday()){
-
-
-            $monday = $today->startOfWeek();
-            $friday = $today->startOfWeek()->parse('this friday');
-
-            $range = generateDateRange($monday, $friday);
-
-            echo '<pre>';
-            print_r($range);
-            echo '</pre>';exit();
-        }
-        exit;
-
         /*   $repo_dec   = App::make('App\Droit\Decision\Repo\DecisionInterface');
         $repo   = App::make('App\Droit\User\Repo\UserInterface');
         $repo_k   = App::make('App\Droit\Categorie\Repo\CategorieKeywordInterface');
@@ -189,23 +170,25 @@ class ArticleController extends Controller
         ];
 
         $make = new \tests\factories\ObjectFactory();
-        $decisions = $make->makeDecisions($publication_at,$data);*/
+        $decisions = $make->makeDecisions($publication_at,$data);
 
-        /*        $user = factory(\App\Droit\User\Entities\User::class)->create([
-                'active_until' => \Carbon\Carbon::today()->startOfDay()->addMonth()->toDateTimeString(),
-                            'cadence'      => 'daily',
-                        ]);
+        $user = factory(\App\Droit\User\Entities\User::class)->create([
+            'active_until' => \Carbon\Carbon::today()->startOfDay()->addMonth()->toDateTimeString(),
+            'cadence'      => 'daily',
+        ]);
 
-                        $abo1 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 174, 'keywords' => '"Accumasa laoreelentesque"']);
-                        $abo2 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 175, 'keywords' => '"à nul A égét 44",BGFA']);
-                        $abo3 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 176, 'keywords' => null]);*/
+        $abo1 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 174, 'keywords' => '"Accumasa laoreelentesque"']);
+        $abo2 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 175, 'keywords' => '"à nul A égét 44",BGFA']);
+        $abo3 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 176, 'keywords' => null]);
+
+*/
 
 
         $alert  = \App::make('App\Droit\Bger\Worker\AlertInterface');
         $alert->setCadence('daily')->setDate($publication_at);
         $users = $alert->getUsers();
 
-        dispatch(new \App\Jobs\UpdateDateDecisions());
+        //dispatch(new \App\Jobs\UpdateDateDecisions());
 
         echo '<pre>';
         print_r($users);
