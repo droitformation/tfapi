@@ -51,7 +51,9 @@ class Decision extends Model
             $publication_at = is_array($publication_at) ? $publication_at : [$publication_at];
 
             $query->where(function ($q) use ($publication_at) {
-                $q->orWhereDate('publication_at', '=' ,$publication_at);
+                foreach ($publication_at as $date){
+                    $q->orWhereDate('publication_at', '=' ,$date);
+                }
             });
         }
     }

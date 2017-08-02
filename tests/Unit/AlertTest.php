@@ -21,6 +21,22 @@ class AlertTest extends TestCase
         parent::tearDown();
     }
 
+    public function testGetDates()
+    {
+        $today  = \Carbon\Carbon::today();
+        $monday = $today->startOfWeek();
+        $friday = $today->startOfWeek()->parse('this friday');
+
+        $publication_at = generateDateRange($monday, $friday);
+
+        $alert = \App::make('App\Droit\Bger\Worker\AlertInterface');
+        $alert->setCadence('daily')->setDate($publication_at);
+
+        $date = $alert->getDate();
+
+        $this->assertEquals($friday,$date);
+    }
+
     public function testGetUsersNotAlreadySent()
     {
         $publication_at = \Carbon\Carbon::today()->startOfDay()->addMonth()->toDateTimeString();
@@ -38,6 +54,9 @@ class AlertTest extends TestCase
         $this->assertEquals(0,$users->count());
     }
 
+    /* =================================
+     * Make decisions and user
+     =================================== */
     public function makeDecisionAndAbos($publication_at)
     {
         $data = [

@@ -93,57 +93,76 @@ class ArticleController extends Controller
 
     public function test()
     {
-
-/*
-        factory(\App\Droit\Decision\Entities\Decision::class)->create([
-            'categorie_id' => 174, 'publication_at' => $date, 'texte' => '<div>Dapibus ante accumasa laoreelentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'
-        ]);
-
-        factory(\App\Droit\Decision\Entities\Decision::class)->create([
-            'categorie_id' => 175,'publication_at' => $date, 'texte' => '<div>Dapibus à nul A égét 44 3€ BGFA quisque à nullä dui cctus malet, consequat liçlà</div>.'
-        ]);
-
-        factory(\App\Droit\Decision\Entities\Decision::class)->create([
-            'categorie_id' => 176,'publication_at' => $date, 'texte' => '<div>Dapibus à nul de chose égét 44 3€ quisque à nullä dui cctus malet, consequat liçlà</div>.'
-        ]);
-
-        factory(\App\Droit\Decision\Entities\Decision::class)->create([
-            'categorie_id' => 177,'publication_at' => $date, 'texte' => '<div>Dapibus à nul de judiciaire égét 4 3€ quisque à nullä dui cctus , consequat liçlà</div>.'
-        ]);
-*/
         $data1 = [
-            ['categorie' => '175', 'keywords' => '"à nul de chose égét"'],
-            ['categorie' => '177', 'keywords' => '"judiciaire égét"'],
+            ['categorie' => '175', 'keywords' => '"à nul de chose"'],
+            ['categorie' => '177', 'keywords' => '"Judicvdiaire égét"'],
             ['categorie' => '176', 'keywords' => '"44 3€"']
         ];
 
-        $publication_at = \Carbon\Carbon::today()->startOfDay()->addMonth()->toDateTimeString();
+        $data3 = [
+            ['categorie_id' => 174, 'texte' => '<div>Accudmasa laoreesdvlentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'],
+            ['categorie_id' => 175, 'texte' => '<div>Dapibus à nul A égét 44 3€ BGFA quisque à nullä dui cctus malet, consvdsequat liçlà</div>.'],
+            ['categorie_id' => 176, 'texte' => '<div>Nul de chose égét 44 3€ quisque à nullä dui cctus malet, confdsequatà</div>.'],
+            ['categorie_id' => 177, 'texte' => '<div>Judicvdiaire égét quisque à nullä dui cctus , conseqdcuat liçlà</div>.']
+        ];
 
-        $make = new \tests\factories\ObjectFactory();
         $data2 = [
+            ['categorie' => '175', 'keywords' => '"Accumasa laoreelentesque"'],
+            ['categorie' => '177', 'keywords' => '"consequat liçlà"'],
+            ['categorie' => '176', 'keywords' => '"Judiciaire"']
+        ];
+
+        $data4 = [
             ['categorie_id' => 174, 'texte' => '<div>Accumasa laoreelentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'],
-            ['categorie_id' => 175, 'texte' => '<div>Dapibus à nul A égét 44 3€ BGFA quisque à nullä dui cctus malet, consequat liçlà</div>.'],
-            ['categorie_id' => 176, 'texte' => '<div>Nul de chose égét 44 3€ quisque à nullä dui cctus malet, consequatà</div>.'],
+            ['categorie_id' => 175, 'texte' => '<div>Dapibus à nul A égét  BGFA quisque à nullä dui cctus malet, consequat liçlà</div>.'],
+            ['categorie_id' => 176, 'texte' => '<div>Nul chose quisque à nullä dui cctus malet, consequatà</div>.'],
             ['categorie_id' => 177, 'texte' => '<div>Judiciaire égét quisque à nullä dui cctus , consequat liçlà</div>.']
         ];
 
-        $decisions = $make->makeDecisions($publication_at,$data2);
+        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+        $publication_at2 = \Carbon\Carbon::tomorrow()->startOfDay()->toDateTimeString();
 
-        $user = $make->makeUser();
+        $make = new \tests\factories\ObjectFactory();
+
+        /*
+
+        $decisions = $make->makeDecisions($publication_at,$data3);
+        $decisions2 = $make->makeDecisions($publication_at2,$data4);
+
+        $user  = $make->makeUser(['cadence' => 'weekly']);
         $make->multipleAbos($user,$data1);
 
+        $user2 = $make->makeUser(['cadence' => 'daily']);
+        $make->multipleAbos($user2,$data2);
+        */
+        $repo = App::make('App\Droit\User\Repo\UserInterface');
+        $user = $repo->find(2);
+
+        $today  =  $publication_at = \Carbon\Carbon::today()->startOfDay();
+        $tomorrow  =  $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateString();
+/*    */
+        $monday = $today->startOfWeek();
+        $friday = $today->startOfWeek()->parse('this friday');
+
+        $dates = generateDateRange($monday, $friday);
+
+        //$make->multipleAbos($user,$data1);
 
         $alert  = App::make('App\Droit\Bger\Worker\AlertInterface');
-        $alert->setCadence('daily')->setDate($publication_at);
+        $alert->setCadence('daily')->setDate($tomorrow);
+
         $users = $alert->getUsers();
-/*        echo '<pre>';
+
+/*
+        echo '<pre>';
         print_r($users);
         echo '</pre>';exit;*/
-        foreach ($users as $user) {
-           // echo view('emails.alert')->with(['user' => $user['user'], 'date' => \Carbon\Carbon::today()->startOfDay(), 'arrets' => $user['abos']]);
+
+        foreach ($users as $users) {
+            echo view('emails.alert')->with(['user' => $users['user'], 'date' => $tomorrow, 'arrets' => $users['abos']]);
         }
 
-        dispatch(new \App\Jobs\SendDailyAlert(\Carbon\Carbon::today()->addMonth()->startOfDay()));
+       // dispatch(new \App\Jobs\SendDailyAlert(\Carbon\Carbon::today()->addMonth()->startOfDay()));
     }
 
     public function abos(){

@@ -37,22 +37,20 @@ class SendEmailAlert implements ShouldQueue
     {
         $alert = \App::make('App\Droit\Bger\Worker\AlertInterface');
         $alert->setCadence($this->cadence)->setDate($this->publication_at);
-
-        $date  = formatDateOrRange($this->publication_at);
         $users = $alert->getUsers();
 
-        if (!$users->isEmpty()){
-            foreach ($users as $user) {
-
-                \Mail::to($user['user']->email)->queue(new \App\Mail\AlerteDecision($user['user'], $date, $user['abos']));
-                // Mark as sent
-                $alert->sent($user['user']);
-            }
-
-            \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Envoi des alertes commencé'));
-        }
-        else{
+        // No alerts today
+        if($users->isEmpty()){
             \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Aucune alertes'));
         }
+
+        // Loop all users and send the alerts
+        foreach ($users as $user) {
+            \Mail::to($user['user']->email)->queue(new \App\Mail\AlerteDecision($user['user'], $this->publication_at, $user['abos']));
+            // Mark as sent
+            $alert->sent($user['user']);
+        }
+
+        \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Envoi des alertes commencé'));
     }
 }

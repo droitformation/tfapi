@@ -50,11 +50,12 @@ class DecisionEloquent implements DecisionInterface{
         $publication_at = isset($params['publication_at']) ? $params['publication_at'] : null;
 
         return $this->decision->with(['categorie'])
-           ->search($terms)
-           ->categorie($categorie)
-           ->published($published)
-           ->publicationAt($publication_at)
-           ->get();
+            ->search($terms)
+            ->categorie($categorie)
+            ->published($published)
+            ->publicationAt($publication_at)
+            ->groupBy('id')
+            ->get();
     }
 
     public function create(array $data){

@@ -281,7 +281,7 @@
                                                                                         <div class='contentEditable' style='text-align: center;'>
                                                                                             <h2 style="font-size: 18px;">Bonjour {{ $user->name }}</h2>
                                                                                             <p style="color:#585858; margin-bottom: 5px; margin-top: 5px;">Voici les derniers arrêts correspondant à vos abonnements</p>
-                                                                                            <p><strong>Date de publication {{ $date }}</strong></p>
+                                                                                            <p><strong>Date de publication {{ formatDateOrRange($date) }}</strong></p>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -323,8 +323,8 @@
                                                                                     <td style="padding: 5px 4px 5px 2px;">{{ isset($decisison->categorie) ? $decisison->categorie->name : '' }}</td>
                                                                                     <td style="padding: 5px 2px;"><strong><a href="">{{ $decisison->numero }}</a></strong></td>
                                                                                     <td style="padding: 5px 2px;">
-                                                                                        @if(isset($arret['keywords']) && !$arret['keywords']->isEmpty())
-                                                                                            {{ $arret['keywords']->implode(',') }}
+                                                                                        @if( isset($arret['keywords']) && !empty($arret['keywords']))
+                                                                                            {{ implode(', ',$arret['keywords']) }}
                                                                                         @endif
                                                                                     </td>
                                                                                 </tr>
