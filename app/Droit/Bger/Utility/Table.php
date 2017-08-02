@@ -15,6 +15,7 @@ class Table
     public $prefix = 'archive_';
     public $yearStart = '2012';
     public $year;
+    public $mainTable = 'wp_archives';
 
     public function setYear($year)
     {
@@ -56,12 +57,24 @@ class Table
     {
         $name = $this->getTableName();
 
-        \DB::table('wp_archives')->whereYear('publication_at', $this->year)->orderBy('id')->chunk(100, function ($decisions) use ($name) {
+        \DB::table($this->mainTable)->whereYear('publication_at', $this->year)->orderBy('id')->chunk(100, function ($decisions) use ($name) {
             foreach ($decisions as $decision) {
                 \DB::table($name)->insert((array) $decision);
             }
         });
-
     }
 
+    public function deleteLastYear()
+    {
+        $name = $this->getTableName();
+
+        if($this->countDecisions($this->mainTable) == $this->countDecisions($name)){
+            \DB::table($this->mainTable)->whereYear('publication_at', $this->year)->delete();
+        }
+    }
+
+    public function countDecisions($table)
+    {
+        return \DB::table($table)->whereYear('publication_at', $this->year)->count();
+    }
 }

@@ -40,7 +40,7 @@ class ArticleController extends Controller
             'decision_at'    => '2017-04-25',
         ];
 
-        $class = new \App\Droit\Bger\Utility\Decision();
+/*        $class = new \App\Droit\Bger\Utility\Decision();
         $class->setDecision($data);
         $result = $class->grabHtml();
 
@@ -48,20 +48,17 @@ class ArticleController extends Controller
 
         echo '<pre>';
         print_r($result);
-        echo '</pre>';exit();
+        echo '</pre>';exit();*/
         //dispatch(new \App\Jobs\SendDailyAlert());
       // \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
+        $worker = new \App\Droit\Bger\Utility\Liste();
 
+        $decisions = $worker->setUrl('20130105')->getListDecisions();
         echo '<pre>';
+        print_r($decisions);
+        echo '</pre>';exit();
 
-        echo '</pre>';
-        exit();
-
-/*        $liste->setUrl('20161021');
-
-        $decisions = $liste->getListDecisions();
-
-        if(!$decisions->isEmpty()){
+/*        if(!$decisions->isEmpty()){
             foreach($decisions as $decision){
                 $new = $arret->setDecision($decision)->getArret();
                 $this->decision->create($new);
@@ -94,22 +91,33 @@ class ArticleController extends Controller
     public function test()
     {
 
-        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+        $start_date = \Carbon\Carbon::createFromDate(2013, 9, 01)->startOfDay();
+        $end_date   = \Carbon\Carbon::createFromDate(2013, 9, 31)->startOfDay();
 
-        $table = new \App\Droit\Bger\Utility\Table();
-        $table->setYear(2012)->create()->transfertArchives();
+        $missing = collect(generateDateRange($start_date, $end_date));
+
+        $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+        //$worker->setMissingDates($missing)->update();
+
+        //$table = new \App\Droit\Bger\Utility\Table();
+        // $mainTable
+
+        /*      $archives = [
+    /*            2012 => 'wp_archives',
+                  2014 => 'wp_archives_2',
+                  2015 => 'wp_archives_3',
+                  2016 => 'wp_archives_4'
+              ];
+
+              foreach ($archives as $year => $archive) {
+                  $table->mainTable = $archive;
+                  $table->setYear($year)->create()->transfertArchives();
+                  $table->deleteLastYear();
+              }*/
 
         //$repo = App::make('App\Droit\Decision\Repo\DecisionInterface');
         //$decisisions = $repo->getYear(2016);
 
-        //$name = $table->getTableName();
-
-        //\DB::table($name)->insert($decisisions->toArray());
-
-        echo '<pre>';
-       // print_r($name);
-        //print_r($decisisions->toArray());
-        echo '</pre>';exit();
     }
 
     public function abos(){

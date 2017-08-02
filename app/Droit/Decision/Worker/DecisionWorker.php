@@ -37,6 +37,7 @@ class DecisionWorker implements DecisionWorkerInterface
         if(!$dates){
             $dates = $this->liste->getList(true);
         }
+
         $this->missing_dates = $this->repo->getMissingDates($dates->toArray());
 
         return $this;

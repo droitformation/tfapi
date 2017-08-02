@@ -78,6 +78,10 @@ class Liste
 
     public function prepareDataFromList()
     {
+        if(empty($this->listData)){
+            $this->listArret = collect([]);
+        }
+
         $this->listArret = collect($this->listData)
             ->chunk(2)->map(function($items){
                 return $items->collapse()->filter()->values()->map(function ($item, $key) {
@@ -126,7 +130,11 @@ class Liste
         });
 
         // Get only second array and remove empty values
-        $liste = isset($content[1]) && !empty($content[1]) ? array_filter($content[1]) :  $this->exception('No content from dateListUrl');
+        if(!isset($content[1]) && empty($content[1])){
+            return $this;
+        }
+
+        $liste = array_filter($content[1]);
 
         // Make sure the number of arrays are even
         $this->listData = ((count($liste) % 2) == 0) ? $liste : $this->exception('Un even number of array from date tables: Fetch.php, line 152. Date: '.$this->dateListUrl);
