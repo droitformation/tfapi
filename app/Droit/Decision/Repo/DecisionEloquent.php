@@ -17,6 +17,11 @@ class DecisionEloquent implements DecisionInterface{
         return $this->decision->with(['categorie'])->get();
     }
 
+    public function getYear($year){
+
+        return $this->decision->whereYear('publication_at', $year)->get();
+    }
+
     public function getDates(array $dates)
     {
         return $this->decision->select('publication_at')->whereIn('publication_at', $dates)->groupBy('publication_at')->get();

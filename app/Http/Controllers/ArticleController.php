@@ -93,6 +93,27 @@ class ArticleController extends Controller
 
     public function test()
     {
+
+        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
+
+        $table = new \App\Droit\Bger\Utility\Table();
+        $table->setYear(2012)->create()->transfertArchives();
+
+        //$repo = App::make('App\Droit\Decision\Repo\DecisionInterface');
+        //$decisisions = $repo->getYear(2016);
+
+        //$name = $table->getTableName();
+
+        //\DB::table($name)->insert($decisisions->toArray());
+
+        echo '<pre>';
+       // print_r($name);
+        //print_r($decisisions->toArray());
+        echo '</pre>';exit();
+    }
+
+    public function abos(){
+
         $data1 = [
             ['categorie' => '175', 'keywords' => '"à nul de chose"'],
             ['categorie' => '177', 'keywords' => '"Judicvdiaire égét"'],
@@ -140,7 +161,7 @@ class ArticleController extends Controller
 
         $today  =  $publication_at = \Carbon\Carbon::today()->startOfDay();
         $tomorrow  =  $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateString();
-/*    */
+        /*    */
         $monday = $today->startOfWeek();
         $friday = $today->startOfWeek()->parse('this friday');
 
@@ -153,65 +174,14 @@ class ArticleController extends Controller
 
         $users = $alert->getUsers();
 
-/*
-        echo '<pre>';
-        print_r($users);
-        echo '</pre>';exit;*/
+        /*
+                echo '<pre>';
+                print_r($users);
+                echo '</pre>';exit;*/
 
         foreach ($users as $users) {
             echo view('emails.alert')->with(['user' => $users['user'], 'date' => $tomorrow, 'arrets' => $users['abos']]);
         }
-
-       // dispatch(new \App\Jobs\SendDailyAlert(\Carbon\Carbon::today()->addMonth()->startOfDay()));
-    }
-
-    public function abos(){
-
-        /*   $repo_dec   = App::make('App\Droit\Decision\Repo\DecisionInterface');
-        $repo   = App::make('App\Droit\User\Repo\UserInterface');
-        $repo_k   = App::make('App\Droit\Categorie\Repo\CategorieKeywordInterface');
-        $user = $repo->find(2);
-
-        $found = $repo_dec->search(['terms' => null, 'categorie' => 176, 'published' => null, 'publication_at' => $publication_at]);
-
-
-        echo '<pre>';
-        print_r($found);
-        echo '</pre>';exit();*/
-
-        $publication_at = \Carbon\Carbon::today()->startOfDay()->toDateTimeString();
-
-/*        $data = [
-            ['categorie_id' => 174, 'texte' => '<div>Accumasa laoreelentesque lorém arcû in quisqué éuismod m44equat liçlà</div>.'],
-            ['categorie_id' => 175, 'texte' => '<div>Dapibus à nul A égét 44 3€ BGFA quisque à nullä dui cctus malet, consequat liçlà</div>.'],
-            ['categorie_id' => 176, 'texte' => '<div>Nul de chose égét 44 3€ quisque à nullä dui cctus malet, consequatà</div>.'],
-            ['categorie_id' => 177, 'texte' => '<div>Judiciaire égét quisque à nullä dui cctus , consequat liçlà</div>.']
-        ];
-
-        $make = new \tests\factories\ObjectFactory();
-        $decisions = $make->makeDecisions($publication_at,$data);
-
-        $user = factory(\App\Droit\User\Entities\User::class)->create([
-            'active_until' => \Carbon\Carbon::today()->startOfDay()->addMonth()->toDateTimeString(),
-            'cadence'      => 'daily',
-        ]);
-
-        $abo1 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 174, 'keywords' => '"Accumasa laoreelentesque"']);
-        $abo2 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 175, 'keywords' => '"à nul A égét 44",BGFA']);
-        $abo3 = factory(\App\Droit\Abo\Entities\Abo::class)->create(['user_id'  => $user->id, 'categorie_id' => 176, 'keywords' => null]);
-
-*/
-
-
-        $alert  = \App::make('App\Droit\Bger\Worker\AlertInterface');
-        $alert->setCadence('daily')->setDate($publication_at);
-        $users = $alert->getUsers();
-
-        //dispatch(new \App\Jobs\UpdateDateDecisions());
-
-        echo '<pre>';
-        print_r($users);
-        echo '</pre>';exit();
 
     }
 }

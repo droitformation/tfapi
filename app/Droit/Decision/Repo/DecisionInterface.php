@@ -5,6 +5,7 @@ interface DecisionInterface {
     public function getAll();
     public function getDates(array $dates);
     public function getMissingDates(array $dates);
+    public function getYear($year);
     public function search($params);
     public function find($data);
     public function findByNumeroAndDate($numero,$date);
