@@ -25,7 +25,9 @@ function generateDateRange($start_date, $end_date)
     $dates = [];
 
     for($date = $start_date; $date->lte($end_date); $date->addDay()) {
-        $dates[] = $date->toDateTimeString();
+        if($date->isWeekday()){
+            $dates[] = $date->toDateTimeString();
+        }
     }
 
     return $dates;

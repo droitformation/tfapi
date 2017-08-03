@@ -53,7 +53,7 @@ class ArticleController extends Controller
       // \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
         $worker = new \App\Droit\Bger\Utility\Liste();
 
-        $decisions = $worker->setUrl('20130105')->getListDecisions();
+        $decisions = $worker->setUrl('20170801')->getListDecisions();
         echo '<pre>';
         print_r($decisions);
         echo '</pre>';exit();
@@ -91,32 +91,32 @@ class ArticleController extends Controller
     public function test()
     {
 
-        $start_date = \Carbon\Carbon::createFromDate(2013, 9, 01)->startOfDay();
-        $end_date   = \Carbon\Carbon::createFromDate(2013, 9, 31)->startOfDay();
-
-        $missing = collect(generateDateRange($start_date, $end_date));
+        // Missing dates to update
+        $start_date = \Carbon\Carbon::createFromDate(2017, 1, 01)->startOfDay();
+        $end_date   = \Carbon\Carbon::createFromDate(2017, 3, 31)->startOfDay();
+        $missing    = collect(generateDateRange($start_date, $end_date));
 
         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
         //$worker->setMissingDates($missing)->update();
 
-        //$table = new \App\Droit\Bger\Utility\Table();
-        // $mainTable
+        exit;
+/*        // Make archives
+        $table = new \App\Droit\Bger\Utility\Table();
 
-        /*      $archives = [
-    /*            2012 => 'wp_archives',
-                  2014 => 'wp_archives_2',
-                  2015 => 'wp_archives_3',
-                  2016 => 'wp_archives_4'
-              ];
+        // Table correspondances
+        $archives = [
+            2012 => 'wp_archives',
+            2013 => 'decisions',
+            2014 => 'wp_archives_2',
+            2015 => 'wp_archives_3',
+            2016 => 'wp_archives_4'
+        ];
 
-              foreach ($archives as $year => $archive) {
-                  $table->mainTable = $archive;
-                  $table->setYear($year)->create()->transfertArchives();
-                  $table->deleteLastYear();
-              }*/
-
-        //$repo = App::make('App\Droit\Decision\Repo\DecisionInterface');
-        //$decisisions = $repo->getYear(2016);
+        foreach ($archives as $year => $archive) {
+            $table->mainTable = $archive;
+            $table->setYear($year)->create()->transfertArchives();
+            $table->deleteLastYear();
+        }*/
 
     }
 

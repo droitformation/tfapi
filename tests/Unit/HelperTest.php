@@ -24,6 +24,24 @@ class HelperTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function testGenerateDateRange()
+    {
+        $start_date = \Carbon\Carbon::createFromDate(2017, 8, 7)->startOfDay();
+        $end_date   = \Carbon\Carbon::createFromDate(2017, 8, 13)->startOfDay();
+
+        $expected = [
+            \Carbon\Carbon::createFromDate(2017, 8, 7)->startOfDay()->toDateTimeString(),
+            \Carbon\Carbon::createFromDate(2017, 8, 8)->startOfDay()->toDateTimeString(),
+            \Carbon\Carbon::createFromDate(2017, 8, 9)->startOfDay()->toDateTimeString(),
+            \Carbon\Carbon::createFromDate(2017, 8, 10)->startOfDay()->toDateTimeString(),
+            \Carbon\Carbon::createFromDate(2017, 8, 11)->startOfDay()->toDateTimeString(),
+        ];
+
+        $result = generateDateRange($start_date,$end_date);
+
+        $this->assertEquals($expected,$result);
+    }
+
     public function testFormatDateOrRange()
     {
         $date = '2017-07-25';

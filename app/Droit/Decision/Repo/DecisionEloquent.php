@@ -63,6 +63,11 @@ class DecisionEloquent implements DecisionInterface{
             ->get();
     }
 
+    public function search_archives($year)
+    {
+        setTable($table)
+    }
+
     public function create(array $data){
 
         $decision = $this->decision->create(array(
