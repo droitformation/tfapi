@@ -63,9 +63,9 @@ class DecisionEloquent implements DecisionInterface{
             ->get();
     }
 
-    public function search_archives($year)
+    public function searchArchives($table,$period,$terms)
     {
-        setTable($table)
+        return $this->decision->setTable($table)->whereBetween('publication_at', $period)->whereRaw("MATCH (texte) AGAINST ('$terms')")->get();
     }
 
     public function create(array $data){

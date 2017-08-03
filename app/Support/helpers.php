@@ -33,6 +33,20 @@ function generateDateRange($start_date, $end_date)
     return $dates;
 }
 
+function archiveTableForDates($start_date, $end_date){
+
+    $start_date = \Carbon\Carbon::parse($start_date);
+    $end_date   = \Carbon\Carbon::parse($end_date);
+
+    $years = [];
+
+    for($date = $start_date; $date->lte($end_date); $date->addYear()) {
+        $years[] = $date->year;
+    }
+
+    return $years;
+}
+
 function formatDateOrRange($date){
 
     setlocale(LC_ALL, 'fr_FR.UTF-8');

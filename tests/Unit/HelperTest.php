@@ -42,6 +42,15 @@ class HelperTest extends TestCase
         $this->assertEquals($expected,$result);
     }
 
+    public function testYearsRangeForArchivesSearch()
+    {
+        $expected = [2013,2014];
+
+        $result = archiveTableForDates('2013-01-01', '2014-03-01');
+
+        $this->assertEquals($expected,$result);
+    }
+
     public function testFormatDateOrRange()
     {
         $date = '2017-07-25';

@@ -15,7 +15,7 @@ class Table
     public $prefix = 'archive_';
     public $yearStart = '2012';
     public $year;
-    public $mainTable = 'wp_archives';
+    public $mainTable = 'decisions';
 
     public function setYear($year)
     {

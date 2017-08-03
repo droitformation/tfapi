@@ -91,7 +91,7 @@ class ArticleController extends Controller
     public function test()
     {
 
-        // Missing dates to update
+ /*       // Missing dates to update
         $start_date = \Carbon\Carbon::createFromDate(2017, 1, 01)->startOfDay();
         $end_date   = \Carbon\Carbon::createFromDate(2017, 3, 31)->startOfDay();
         $missing    = collect(generateDateRange($start_date, $end_date));
@@ -99,12 +99,29 @@ class ArticleController extends Controller
         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
         //$worker->setMissingDates($missing)->update();
 
-        exit;
-/*        // Make archives
+        exit;*/
+
+       // Make archives
         $table = new \App\Droit\Bger\Utility\Table();
 
+        $tables = archiveTableForDates('2015-01-01', '2016-03-01');
+
+        $repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
+
+        $results = collect([]);
+
+        foreach ($tables as $table) {
+
+            $result  = $repo->searchArchives('archive_'.$table,['2015-01-01','2016-09-01'],'Cindy Leschaud');
+            $results = $results->merge($result);
+        }
+
+        echo '<pre>';
+        print_r($results);
+        echo '</pre>';exit;
+
         // Table correspondances
-        $archives = [
+/*        $archives = [
             2012 => 'wp_archives',
             2013 => 'decisions',
             2014 => 'wp_archives_2',
