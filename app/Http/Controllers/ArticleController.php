@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Droit\Decision\Repo\DecisionInterface;
 use Illuminate\Support\Facades\App;
+use \ForceUTF8\Encoding;
 
 class ArticleController extends Controller
 {
@@ -30,42 +31,43 @@ class ArticleController extends Controller
             \Carbon\Carbon::createFromDate(2017, 7, 21)->startOfDay()->toDateTimeString(),
         ]);
 
-       // $worker = App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+
        // $worker->setMissingDates($dates)->update();
         $data =  [
-            'numero'         => '4A_577/2016',
+            'numero'         => '4A_578/2016',
             'categorie'      => 'Droits réels',
             'subcategorie'   => 'mesures provisionnelles (rectification du registre foncier)',
-            'publication_at' => '2017-07-18',
-            'decision_at'    => '2017-04-25',
+            'publication_at' => '2017-08-04',// 20170804
+            'decision_at'    => '2017-06-27', // 27.06.2017
         ];
 
-/*        $class = new \App\Droit\Bger\Utility\Decision();
-        $class->setDecision($data);
-        $result = $class->grabHtml();
-
-       // header('Content-Type: text/html; charset=utf-8');
-
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';exit();*/
-        //dispatch(new \App\Jobs\SendDailyAlert());
-      // \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
+        $arret  = App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
+        $class  = new \App\Droit\Bger\Utility\Decision();
         $worker = new \App\Droit\Bger\Utility\Liste();
 
-        $decisions = $worker->setUrl('20170801')->getListDecisions();
+        $decisions = $worker->setUrl('2017-04-03')->getListDecisions();
+
+        //header('Content-Type: text/html; charset=UTF-8');
+
+        //$repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
+       // $repo->create($result);
+
+        //dispatch(new \App\Jobs\SendDailyAlert());
+      // \Mail::to('cindy.leschaud@gmail.com')->queue(new \App\Mail\SuccessNotification('Mise à jour des commencé'));
+
         echo '<pre>';
         print_r($decisions);
         echo '</pre>';exit();
 
-/*        if(!$decisions->isEmpty()){
+       if(!$decisions->isEmpty()){
             foreach($decisions as $decision){
                 $new = $arret->setDecision($decision)->getArret();
                 $this->decision->create($new);
             }
         }
-
-        $result = $arret->setDecision($decisions->first())->getArret();*/
+/*
+        $result = $arret->setDecision($decisions->first())->getArret();
+*/
 
 
        // redirect('article');
@@ -91,20 +93,18 @@ class ArticleController extends Controller
     public function test()
     {
 
- /*       // Missing dates to update
-        $start_date = \Carbon\Carbon::createFromDate(2017, 1, 01)->startOfDay();
-        $end_date   = \Carbon\Carbon::createFromDate(2017, 3, 31)->startOfDay();
+        // 2017-03-20
+      // Missing dates to update
+        $start_date = \Carbon\Carbon::createFromDate(2017, 4, 1)->startOfDay();
+        $end_date   = \Carbon\Carbon::createFromDate(2017, 4, 31)->startOfDay();
         $missing    = collect(generateDateRange($start_date, $end_date));
 
         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
         //$worker->setMissingDates($missing)->update();
 
-        exit;*/
+        exit;
 
-       // Make archives
-        $table = new \App\Droit\Bger\Utility\Table();
-
-        $tables = archiveTableForDates('2015-01-01', '2016-03-01');
+/*
 
         $repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
 
@@ -118,10 +118,10 @@ class ArticleController extends Controller
 
         echo '<pre>';
         print_r($results);
-        echo '</pre>';exit;
+        echo '</pre>';exit;*/
 
         // Table correspondances
-/*        $archives = [
+        $archives = [
             2012 => 'wp_archives',
             2013 => 'decisions',
             2014 => 'wp_archives_2',
@@ -129,11 +129,15 @@ class ArticleController extends Controller
             2016 => 'wp_archives_4'
         ];
 
-        foreach ($archives as $year => $archive) {
-            $table->mainTable = $archive;
-            $table->setYear($year)->create()->transfertArchives();
-            $table->deleteLastYear();
-        }*/
+        // Make archives
+        $table = new \App\Droit\Bger\Utility\Table();
+
+        //$tables = archiveTableForDates('2015-01-01', '2016-03-01');
+        //foreach ($archives as $year => $archive) {}
+
+       // $table->mainTable = 'decisions';
+       // $table->setYear(2013)->create()->transfertArchives();
+       // $table->deleteLastYear();
 
     }
 

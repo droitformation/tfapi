@@ -3,6 +3,7 @@
 namespace App\Droit\Bger\Utility;
 
 use Goutte\Client;
+use \ForceUTF8\Encoding;
 
 class Decision {
 
@@ -89,13 +90,14 @@ class Decision {
 
         // Get the content
         $content['content'] = $crawler->filter('div[class=content]')->each(function ($node) {
-            return cleanText($node->html(), $repto = NULL);
+            return cleanText(utf8_decode($node->html()), $repto = NULL);
         });
 
         if(!empty($content['content'])) {
             // delete http://relevancy.bger.ch comment
             if(isset($content['content'][1])) unset($content['content'][1]);
-            $content['content'] = isset($content['content'][0]) ? $content['content'][0] : '';
+
+            $content['content'] = isset($content['content'][0]) ? Encoding::toUTF8($content['content'][0]) : '';
         }
 
         if(!empty($content['title'])) {

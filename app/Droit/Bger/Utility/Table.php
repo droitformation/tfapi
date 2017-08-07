@@ -48,6 +48,7 @@ class Table
                 $table->timestamps();
             });
 
+            \DB::statement('ALTER TABLE '.$this->prefix.$this->year.' ADD FULLTEXT full(texte)');
         }
 
         return $this;

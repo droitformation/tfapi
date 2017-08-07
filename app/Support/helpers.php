@@ -104,7 +104,7 @@ function cleanText($str, $repto = null)
     $str  = str_replace("<div class=\"para\">","<div>",$str);
     $str  = str_replace('\u00a0', '', $str );
     $str  = str_replace("\xc2\xa0","",$str);
-    $str  = str_replace("&nbsp;"," ",$str);
+   // $str  = str_replace("&nbsp;"," ",$str);
     $str  = preg_replace('/\s{2,}/', ' ',$str);
     $str =  preg_replace('/<([^<\/>]*)>([\s]*?|(?R))<\/\1>/imsU', !is_string ($repto) ? '' : $repto,$str);
     //$str  = str_replace("</div>","\n",$str);

@@ -26,7 +26,8 @@ class Decision extends Model
         {
             foreach($terms as $term)
             {
-                $query->whereRaw('texte REGEXP "[[:<:]]'.$term.'[[:>:]]"');
+                $term = addslashes($term);
+                $query->whereRaw("MATCH (texte) AGAINST ('$term')");
             }
         };
     }
