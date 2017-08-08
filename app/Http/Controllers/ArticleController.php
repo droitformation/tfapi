@@ -12,11 +12,18 @@ class ArticleController extends Controller
 {
     protected $decision;
 
-    public function __construct( DecisionInterface $decision)
+    public function __construct(DecisionInterface $decision)
     {
         setlocale(LC_ALL, 'fr_FR.UTF-8');
 
         $this->decision = $decision;
+    }
+
+    public function search(Request $request)
+    {
+        $results = !empty($request->all()) ? $this->decision->searchArchives($request->only(['period','terms','published'])) : collect([]);
+
+        return view('welcome')->with(['results' => $results, 'params' => $request->only(['period','terms','published'])]);
     }
 
     public function update()
@@ -73,7 +80,7 @@ class ArticleController extends Controller
        // redirect('article');
     }
 
-    public function search()
+    public function mail()
     {
          \Mail::to('cindy.leschaud@gmail.com')->send(new \App\Mail\AlerteDecision());
 
@@ -95,30 +102,40 @@ class ArticleController extends Controller
 
         // 2017-03-20
       // Missing dates to update
-        $start_date = \Carbon\Carbon::createFromDate(2017, 4, 1)->startOfDay();
-        $end_date   = \Carbon\Carbon::createFromDate(2017, 4, 31)->startOfDay();
+/*        $start_date = \Carbon\Carbon::createFromDate(2013, 12, 20)->startOfDay();
+        $end_date   = \Carbon\Carbon::createFromDate(2013, 12, 31)->startOfDay();
         $missing    = collect(generateDateRange($start_date, $end_date));
 
         $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
-        //$worker->setMissingDates($missing)->update();
+        $worker->setMissingDates($missing)->update();
 
-        exit;
-
-/*
+        exit;*/
 
         $repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
 
-        $results = collect([]);
+/*        $results = collect([]);
+
+        $tables = archiveTableForDates('2016-01-01','2017-08-07');
 
         foreach ($tables as $table) {
 
-            $result  = $repo->searchArchives('archive_'.$table,['2015-01-01','2016-09-01'],'Cindy Leschaud');
+            $name = $table == date('Y') ? 'decisions' : 'archive_'.$table;
+
+            $result  = $repo->searchTable($name,['period' => ['2016-01-01','2017-08-07'], 'terms' => '135 III 397', 'published' => true]);
             $results = $results->merge($result);
-        }
+        }*/
+
+        $params  = [
+            'period'    => ['2016-01-01','2017-08-07'],
+            'terms'     => '135 III 397',
+            'published' => true
+        ];
+
+        $results = $repo->searchArchives($params);
 
         echo '<pre>';
-        print_r($results);
-        echo '</pre>';exit;*/
+        print_r($results->pluck('numero'));
+        echo '</pre>';exit;
 
         // Table correspondances
         $archives = [
@@ -130,14 +147,14 @@ class ArticleController extends Controller
         ];
 
         // Make archives
-        $table = new \App\Droit\Bger\Utility\Table();
+        //$table = new \App\Droit\Bger\Utility\Table();
 
-        //$tables = archiveTableForDates('2015-01-01', '2016-03-01');
+
         //foreach ($archives as $year => $archive) {}
 
-       // $table->mainTable = 'decisions';
-       // $table->setYear(2013)->create()->transfertArchives();
-       // $table->deleteLastYear();
+        //$table->mainTable = 'decisions';
+        //$table->setYear(2013)->create()->transfertArchives();
+        //$table->deleteLastYear();
 
     }
 

@@ -3,13 +3,22 @@
 namespace App\Droit\Decision\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
+use App\Droit\Decision\Traits\FullTextSearch;
 
 class Decision extends Model
 {
-    protected $table = 'decisions';
+    use FullTextSearch;
 
+    protected $table = 'decisions';
     protected $dates = ['publication_at','decision_at'];
+
+
+    /**
+     * The columns of the full text index
+     */
+    protected $searchable = [
+        'texte'
+    ];
 
     /**
      * The attributes that are mass assignable.

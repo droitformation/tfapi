@@ -7,7 +7,8 @@ interface DecisionInterface {
     public function getMissingDates(array $dates);
     public function getYear($year);
     public function search($params);
-    public function searchArchives($table,$period,$terms);
+    public function searchArchives($params);
+    public function searchTable($table,$params);
     public function find($data);
     public function findByNumeroAndDate($numero,$date);
     public function create(array $data);

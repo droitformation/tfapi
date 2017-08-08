@@ -63,9 +63,32 @@ class DecisionEloquent implements DecisionInterface{
             ->get();
     }
 
-    public function searchArchives($table,$period,$terms)
+    public function searchArchives($params)
     {
-        return $this->decision->setTable($table)->whereBetween('publication_at', $period)->whereRaw("MATCH (texte) AGAINST ('$terms')")->get();
+        $results = collect([]);
+        $period  = isset($params['period']) ? $params['period'] : null;
+        $tables  = archiveTableForDates($period[0],$period[1]);
+
+        foreach ($tables as $table) {
+            $name    = $table == date('Y') ? 'decisions' : 'archive_'.$table;
+            $result  = $this->searchTable($name,$params);
+            $results = $results->merge($result);
+        }
+
+        return $results;
+    }
+
+    public function searchTable($table,$params)
+    {
+        $terms     = isset($params['terms']) && !empty($params['terms']) ? $params['terms'] : null;
+        $published = isset($params['published']) ? $params['published'] : null;
+        $period    = isset($params['period']) ? $params['period'] : null;
+
+        return $this->decision->setTable($table)
+            ->whereBetween('publication_at', $period)
+            ->searchfull($terms)
+            ->published($published)
+            ->get();
     }
 
     public function create(array $data){

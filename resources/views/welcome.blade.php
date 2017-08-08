@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
@@ -16,19 +18,8 @@
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
+                font-weight: 200;
                 margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
             }
 
             .position-ref {
@@ -42,7 +33,9 @@
             }
 
             .content {
-                text-align: center;
+                text-align: left;
+                width: 1024px;
+                margin: 20px auto;
             }
 
             .title {
@@ -76,20 +69,72 @@
                     @endif
                 </div>
             @endif
+        </div>
+        <div class="container container-main">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default" style="margin-top: 30px;">
+                        <div class="panel-body">
+                            <form class="form-inline" method="POST" action="{{ url('search') }}">{!! csrf_field() !!}
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+                                <div class="input-group date">
+                                    <input type="text" class="form-control datepicker" name="period[]" placeholder="début">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div class="input-group date">
+                                    <input type="text" class="form-control datepicker" name="period[]" placeholder="fin">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input" class="sr-only">Recherhe</label>
+                                    <input type="text" class="form-control" name="terms" id="input" placeholder="Recherche" style="width:400px;">
+                                </div>
+                                <div class="checkbox" style="margin: 0 3px;">
+                                    <label>
+                                        <input name="published" value="1" type="checkbox"> Pour publication
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-info">OK</button>
+                            </form>
+                        </div>
+                    </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <h2>Résultats</h2>
+                    <?php
+                        echo '<pre>';
+                        print_r($params);
+                        echo '</pre>';
+                    ?>
+                    @if(!$results->isEmpty())
+                        @foreach($results as $decision)
+                            <h3>{{ $decision->numero }}</h3>
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         </div>
+
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr-CH.min.js"></script>
+        <script>
+            $( function() {
+                $('.datepicker').datepicker({
+                    language: 'fr',
+                    format: 'yyyy-mm-dd',
+                    dateFormat: 'yyyy-mm-dd',
+                    autoclose: true,
+                    defaultViewDate: 'today',
+                });
+            });
+        </script>
     </body>
 </html>

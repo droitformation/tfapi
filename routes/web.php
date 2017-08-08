@@ -24,8 +24,10 @@ Route::get('/', function () {
 Route::get('articles', 'ArticleController@index');
 Route::get('test', 'ArticleController@test');
 Route::get('update', 'ArticleController@update');
-Route::get('search', 'ArticleController@search');
+Route::get('mail', 'ArticleController@mail');
 Route::get('abos', 'ArticleController@abos');
+
+Route::match(['get', 'post'], 'search', 'ArticleController@search');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
