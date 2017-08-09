@@ -17,8 +17,7 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 200;
+                font-family: Arial, sans-serif;
                 margin: 0;
             }
 
@@ -90,15 +89,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input" class="sr-only">Recherhe</label>
+                                    <label for="input" class="sr-only">Recherche</label>
                                     <input type="text" class="form-control" name="terms" id="input" placeholder="Recherche" style="width:400px;">
                                 </div>
-                                <div class="checkbox" style="margin: 0 3px;">
+                                <div class="checkbox" style="margin: 0 5px;">
                                     <label>
                                         <input name="published" value="1" type="checkbox"> Pour publication
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-info">OK</button>
+
+                                <button type="submit" class="btn btn-info pull-right">OK</button>
                             </form>
                         </div>
                     </div>

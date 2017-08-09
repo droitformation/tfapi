@@ -32,3 +32,21 @@ Route::match(['get', 'post'], 'search', 'ArticleController@search');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+/*
+|--------------------------------------------------------------------------
+| Backend Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
+{
+    Route::get('/', ['uses' => 'Backend\AdminController@index']);
+
+    Route::post('upload', 'Backend\UploadController@upload');
+    Route::post('uploadFile', 'Backend\UploadController@uploadFile');
+    Route::post('uploadJS', 'Backend\UploadController@uploadJS');
+    Route::post('uploadRedactor', 'Backend\UploadController@uploadRedactor');
+
+    Route::get('imageJson/{id?}', ['uses' => 'Backend\UploadController@imageJson']);
+    Route::get('fileJson/{id?}', ['uses' => 'Backend\UploadController@fileJson']);
+
+});
