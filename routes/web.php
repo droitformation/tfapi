@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('articles', 'ArticleController@index');
+Route::get('posts', 'ArticleController@posts');
 Route::get('test', 'ArticleController@test');
 Route::get('update', 'ArticleController@update');
 Route::get('mail', 'ArticleController@mail');

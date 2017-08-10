@@ -26,6 +26,15 @@ class ArticleController extends Controller
         return view('welcome')->with(['results' => $results, 'params' => $request->only(['period','terms','published'])]);
     }
 
+    public function posts()
+    {
+        $posts = \App\Droit\Wordpress\Entites\Post::type()->status()->with(['postmetas'])->take(5)->get();
+
+        echo '<pre>';
+        print_r($posts);
+        echo '</pre>';
+    }
+
     public function update()
     {
         /*  $this->update->missing()->update();*/

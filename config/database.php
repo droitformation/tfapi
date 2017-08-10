@@ -54,6 +54,21 @@ return [
             'engine' => null,
         ],
 
+        'wordpress_db_connection' => [
+            'driver' => 'mysql',
+            'host'      => env('DB_TEST_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_WORDPRESS_DATABASE', 'wordpress'),
+            'username' => env('DB_WORDPRESS_USERNAME', 'root'),
+            'password' => env('DB_WORDPRESS_PASSWORD', 'root'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'testing' => [
             'driver'    => 'mysql',
             'host'      => env('DB_TEST_HOST', 'localhost'),
