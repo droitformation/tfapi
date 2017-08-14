@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Taxonomy extends Model
 {
     protected $connection = 'wordpress_db_connection';
-    protected $table = 'term_taxonomy';
+    protected $table = 'wp_term_taxonomy';
     protected $primaryKey = 'term_taxonomy_id';
     protected $with = ['term'];
     public $timestamps = false;
@@ -27,7 +27,7 @@ class Taxonomy extends Model
 
     public function posts()
     {
-        return $this->belongsToMany('App\Droit\Wordpress\Entites\Post', 'term_relationships', 'term_taxonomy_id', 'object_id');
+        return $this->belongsToMany('App\Droit\Wordpress\Entites\Post', 'wp_term_relationships', 'term_taxonomy_id', 'object_id');
     }
 
     /**

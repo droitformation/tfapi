@@ -1,0 +1,69 @@
+.header-nav-wrapper, .menuzord{
+    background: #82acc8;
+}
+
+.header_wrapper{
+    width: 100%;
+    height: 300px;
+    background: url("../images/bg.png") repeat-x;
+}
+
+.header_wrapper h2{
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.header_wrapper h1, .header_wrapper img{
+    margin-top: 30px;
+}
+
+.header_wrapper p{
+    color: #002943;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.menuzord-menu > li > a{
+    color: #fff;
+    font-size: 14px;
+}
+
+.menuzord.red .menuzord-menu > li.active > a,
+.menuzord.red .menuzord-menu > li:hover > a,
+.menuzord.red .menuzord-menu ul.dropdown li:hover > a{
+    background: #0f4060;
+}
+
+.menuzord-menu > li {
+    padding: 10px 0;
+    line-height: 60px;
+}
+
+.menuzord-brand img {
+    height:45px;
+}
+
+.menuzord-brand{
+    margin-top: 25px;
+}
+
+.menuzord-menu li.logos a{
+    padding: 8px 10px 8px 20px;
+    margin-left: 5px;
+}
+
+.menuzord.red .menuzord-menu > li.logos:hover > a{
+    background: none;
+}
+
+.btn-default {
+    border-color:#b3b3b3;
+    text-transform: none;
+}
+
+.icon-box.left a.link-more{
+    padding: 6px 10px;
+    margin: -10px 0 0 0;
+    background: #0f4060;
+    border-color:#0a3754;
+}

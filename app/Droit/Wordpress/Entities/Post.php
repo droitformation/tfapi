@@ -18,8 +18,15 @@ class Post extends Model {
     public function taxonomies()
     {
         return $this->belongsToMany(
-            'App\Droit\Wordpress\Entites\Taxonomy', 'term_relationships', 'object_id', 'term_taxonomy_id'
+            'App\Droit\Wordpress\Entites\Taxonomy', 'wp_term_relationships', 'object_id', 'term_taxonomy_id'
         );
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(
+            'App\Droit\Wordpress\Entites\Taxonomy', 'wp_term_relationships', 'object_id', 'term_taxonomy_id'
+        )->where('taxonomy', '=','category');
     }
     /**
      * Filter by post type

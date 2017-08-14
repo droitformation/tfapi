@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Term extends Model
 {
     protected $connection = 'wordpress_db_connection';
-    protected $table = 'terms';
+    protected $table = 'wp_terms';
     protected $primaryKey = 'term_id';
 
     public $timestamps = false;

@@ -10,17 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-
-    $model = App::make('App\Droit\Decision\Repo\DecisionInterface');
-
-    $expect = ['sicherheit','autre mot ici','tribunal'];
-
-    $results = $model->search($expect, 188, 1);
-
-});
-
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('articles', 'ArticleController@index');
 Route::get('posts', 'ArticleController@posts');
 Route::get('test', 'ArticleController@test');
@@ -31,7 +21,6 @@ Route::get('abos', 'ArticleController@abos');
 Route::match(['get', 'post'], 'search', 'ArticleController@search');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
 /*
 |--------------------------------------------------------------------------

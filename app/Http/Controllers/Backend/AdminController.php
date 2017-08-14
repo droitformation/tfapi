@@ -18,6 +18,18 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $posts = \App\Droit\Wordpress\Entites\Post::type()->status()->with(['postmetas','categories'])->take(1)->get();
+
+        $post = $posts->first();
+
+/*        $taxonomies = $post->taxonomies->map(function ($item, $key) {
+            return [$item->taxonomy => $item['term']];
+        });*/
+
+        echo '<pre>';
+        print_r($post->categories);
+        echo '</pre>';exit;
+
         return view('backend.index');
     }
 }
