@@ -600,7 +600,7 @@
         /* ---------------------------------------------------------------------- */
         /* ----------- Active Menu Item on Reaching Different Sections ---------- */
         /* ---------------------------------------------------------------------- */
-        TM_activateMenuItemOnReach: function() {
+  /*      TM_activateMenuItemOnReach: function() {
             var $onepage_nav = $('.onepage-nav');
             var cur_pos = $window.scrollTop() + 2;
             var nav_height = $onepage_nav.outerHeight();
@@ -616,7 +616,7 @@
                     $onepage_nav.find('a[href="#' + $(this).attr('id') + '"]').parent().addClass('current').addClass('active');
                 }
             });
-        },
+        },*/
 
         /* ---------------------------------------------------------------------- */
         /* ------------------- on click scrool to target with smoothness -------- */

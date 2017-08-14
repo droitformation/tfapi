@@ -16,13 +16,16 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('frontend.index');
+    }
+
+    public function page()
+    {
+        $posts      = \App\Droit\Wordpress\Entites\Post::type()->status()->with(['postmetas'])->take(5)->get();
+        $categories = \App\Droit\Wordpress\Entites\Taxonomy::categories()->take(5)->get();
+
+        return view('frontend.page')->with(['posts' => $posts, 'categories' => $categories->pluck('term')]);
     }
 }

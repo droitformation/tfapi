@@ -97,20 +97,15 @@ This file contains the common styles of this theme.
   color: #fff;
   text-shadow: none;
 }
-::-webkit-selection {
-  background: #333333;
-  /* Safari */
-  color: #fff;
-  text-shadow: none;
-}
+
 :active,
 :focus {
   outline: none !important;
 }
 body {
   line-height: 1.7;
-  color: #777777;
-  font-size: 13px;
+  color: #5e5e5e;
+  font-size: 14px;
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
   background-attachment: fixed;
@@ -1601,7 +1596,7 @@ section > .container-fluid {
 }
 /* -------- Scrolltofixed ---------- */
 .header-nav .header-nav-wrapper.scroll-to-fixed-fixed.scroll-to-fixed-fixed {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #78a3c0;
 }
 .header-nav .header-nav-absolute-wrapper.scroll-to-fixed-fixed.scroll-to-fixed-fixed .menuzord {
   border-right: 1px solid #eee;
@@ -2094,7 +2089,7 @@ section > .container-fluid {
 .form-control {
   border-radius: 0;
   box-shadow: none;
-  height: 45px;
+  height: 32px;
 }
 label {
   font-weight: normal;
@@ -2323,6 +2318,7 @@ form .error {
   overflow: hidden;
   margin: 0;
   width: 100%;
+  border: 1px solid #ddd;
 }
 .box-hover-effect img {
   position: relative;

@@ -28,12 +28,6 @@
     font-size: 14px;
 }
 
-.menuzord.red .menuzord-menu > li.active > a,
-.menuzord.red .menuzord-menu > li:hover > a,
-.menuzord.red .menuzord-menu ul.dropdown li:hover > a{
-    background: #0f4060;
-}
-
 .menuzord-menu > li {
     padding: 10px 0;
     line-height: 60px;
@@ -52,8 +46,23 @@
     margin-left: 5px;
 }
 
-.menuzord.red .menuzord-menu > li.logos:hover > a{
+
+.menuzord-menu > li.active > a,
+.menuzord-menu > li:hover > a,
+.menuzord-menu ul.dropdown li:hover > a{
+    background: #0f4060;
+}
+
+.menuzord-menu > li.logos:hover > a{
     background: none;
+}
+
+.login-form{
+    margin-bottom: 0;
+}
+
+.panel-form{
+    min-height: 145px;
 }
 
 .btn-default {
@@ -61,9 +70,63 @@
     text-transform: none;
 }
 
+.btn-dark {
+    background: #0f4060;
+    border-color:#0a3754;
+}
+
+.btn-sm {
+    font-size: 12px;
+    padding: 6px 17px;
+}
+
+.bg-dark{
+    background: #0f4060;
+}
+
+.panel-dark > .panel-heading {
+    background: #0f4060;
+    color: #fff;
+    border-color:#0a3754;
+    font-size: 15px;
+}
+
+.panel-dark {
+    border-color:#ddd;
+}
+
 .icon-box.left a.link-more{
     padding: 6px 10px;
     margin: -10px 0 0 0;
     background: #0f4060;
     border-color:#0a3754;
+}
+
+.arrets-links-bloc{
+    color: #FFFFFF;
+    display: block;
+    font-size: 18px;
+    padding: 8px;
+    line-height: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    word-spacing: 2px;
+}
+
+.arrets-links-bloc:hover{
+    color: #d6e9f5;
+}
+
+.arrets-links-bloc span {
+    font-size: 13px;
+    color: #a1bdd1;
+    display: block;
+}
+
+/* =====
+  Posts
+======*/
+
+.post-content{
+    text-align: justify;
 }

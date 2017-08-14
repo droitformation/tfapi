@@ -30,8 +30,10 @@ class ArticleController extends Controller
     {
         $posts = \App\Droit\Wordpress\Entites\Post::type()->status()->with(['postmetas'])->take(5)->get();
 
+        $categories = \App\Droit\Wordpress\Entites\Taxonomy::categories()->take(5)->get();
+
         echo '<pre>';
-        print_r($posts);
+        print_r($categories->pluck('term'));
         echo '</pre>';
     }
 

@@ -22,6 +22,9 @@ Route::match(['get', 'post'], 'search', 'ArticleController@search');
 
 Auth::routes();
 
+Route::post('code', 'CodeController@code')->name('code');
+
+Route::get('page', 'HomeController@page')->name('page');
 /*
 |--------------------------------------------------------------------------
 | Backend Routes

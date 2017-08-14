@@ -4,7 +4,7 @@
         <div class="header-nav-wrapper navbar-scrolltofixed">
             <div class="container">
                 <nav>
-                    <div id="menuzord-right" class="menuzord red">
+                    <div id="menuzord-right" class="menuzord">
                         <a class="menuzord-brand" href="javascript:void(0)">
                             <img src="{{ asset('images/logo.svg') }}" alt="Logo droit praticien">
                         </a>
