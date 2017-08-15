@@ -29,6 +29,7 @@
 </section>
 
 @include('partials.links')
+@include('partials.message')
 
 <!-- Section: Divider -->
 <section>
@@ -46,7 +47,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
                     <div class="panel-body panel-form">
-                        @include('auth.login')
+                        @include('auth.partials.login-form')
                     </div>
                 </div>
             </div>

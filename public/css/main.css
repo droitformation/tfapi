@@ -1,3 +1,22 @@
+/* =============================================
+    Sticky footer with flex box
+============================================= */
+html, body {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #f6f6f6;
+}
+#wrapper{
+    flex: 1 0 auto;
+}
+
+/* =============================================
+   Styles custom
+============================================= */
 .header-nav-wrapper, .menuzord{
     background: #82acc8;
 }
@@ -123,10 +142,62 @@
     display: block;
 }
 
+.message-alert-box .alert{
+    margin-bottom: 0;
+}
+
 /* =====
   Posts
 ======*/
 
 .post-content{
     text-align: justify;
+}
+
+/* =============================================
+    Flexbox align
+============================================= */
+
+.container-categories {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.categorie-item{
+    width: 24%;
+    height: 40px;
+    margin: 0.5%;
+    font-size: 13px;
+    margin-bottom: 8px;
+    border: 1px solid #fff;
+    color: #0a1854;
+    background: #c7dae6;
+    padding:8px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.categorie-item:hover{
+    background: #f1f1f1;
+}
+
+.align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.w-80{
+    width: 80px !important;
+}
+
+.w-p-90{
+    width: 90% !important;
 }

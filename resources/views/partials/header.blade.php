@@ -5,7 +5,7 @@
             <div class="container">
                 <nav>
                     <div id="menuzord-right" class="menuzord">
-                        <a class="menuzord-brand" href="javascript:void(0)">
+                        <a class="menuzord-brand" href="{{ url('/') }}">
                             <img src="{{ asset('images/logo.svg') }}" alt="Logo droit praticien">
                         </a>
                         <ul class="menuzord-menu onepage-nav">

@@ -60,7 +60,7 @@
     <![endif]-->
 </head>
 
-<body class="has-side-panel side-panel-right fullwidth-page side-push-panel">
+<body class="has-side-panel side-panel-right fullwidth-page side-push-panel main-site">
 
 <div id="wrapper" class="clearfix">
 
@@ -75,20 +75,21 @@
 
     </div>
     <!-- end main-content -->
-
-    <!-- Footer -->
-    <footer id="footer" class="footer pb-0 pt-0 bg-deep">
-        <div class="container-fluid bg-black-222 p-20">
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <p class="font-11 m-0">Copyright &copy; {{ date('Y') }} Droit Pour le praticien.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
 </div>
 <!-- end wrapper -->
+
+
+<!-- Footer -->
+<footer id="footer" class="footer pb-0 pt-0 bg-deep">
+    <div class="container-fluid bg-black-222 p-20">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <p class="font-11 m-0">Copyright &copy; {{ date('Y') }} Droit Pour le praticien.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
 
 <!-- Footer Scripts -->
 <!-- JS | Custom script for all pages -->

@@ -20,11 +20,12 @@ class Taxonomy extends Model
         return $this->belongsTo('App\Droit\Wordpress\Entites\Term', 'term_id');
     }
 
-    /**
-     * Filter by post author
-     */
     public function scopeCategories($query) {
         return $query->where('taxonomy','=','category');
+    }
+
+    public function scopeTopCategories($query) {
+        return $query->where('taxonomy','=','category')->where('parent','=',0);
     }
 
     public function parent()
