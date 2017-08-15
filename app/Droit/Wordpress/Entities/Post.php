@@ -28,6 +28,7 @@ class Post extends Model {
             'App\Droit\Wordpress\Entites\Taxonomy', 'wp_term_relationships', 'object_id', 'term_taxonomy_id'
         )->where('taxonomy', '=','category');
     }
+
     /**
      * Filter by post type
      */

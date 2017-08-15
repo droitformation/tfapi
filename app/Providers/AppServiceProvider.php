@@ -15,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        \View::composer(
+            ['partials.categories-list','partials.categories'], 'App\Http\ViewComposers\CategoryComposer'
+        );
     }
 
     /**

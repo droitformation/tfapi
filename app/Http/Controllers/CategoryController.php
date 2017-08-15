@@ -8,8 +8,8 @@ class CategoryController extends Controller
 {
     public function show($id)
     {
-        $categorie = \App\Droit\Wordpress\Entites\Taxonomy::topCategories()->find($id);
+        $categorie = \App\Droit\Wordpress\Entites\Taxonomy::where('term_id','=',$id)->firstOrFail();
 
-        return view('frontend.category')->with(['posts' => $posts, 'categories' => $categories->slice(1)->pluck('term')]);
+        return view('frontend.category')->with(['categorie' => $categorie]);
     }
 }

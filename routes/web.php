@@ -25,6 +25,8 @@ Auth::routes();
 Route::post('code', 'CodeController@code')->name('code');
 
 Route::get('page', 'HomeController@page')->name('page');
+Route::get('category/{id}', 'CategoryController@show')->name('category');
+
 /*
 |--------------------------------------------------------------------------
 | Backend Routes

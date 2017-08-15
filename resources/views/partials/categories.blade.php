@@ -1,8 +1,16 @@
 @if(!$categories->isEmpty())
-    <h3 class="mt-5">Catégories</h3>
-    <div class="container-categories">
-        @foreach($categories as $categorie)
-            <a href="{{ url('categorie/'.$categorie->term_id) }}" class="categorie-item"><span><i class="fa fa-tag"></i> &nbsp;{{ $categorie->name }}</span></a>
-        @endforeach
+
+    <h3 class="mt-5 mb-0">
+        Catégories
+        <button class="btn btn-dark btn-sm pull-right" type="button" data-toggle="collapse" data-target="#collapseCategories"  aria-controls="collapseCategories">Choisir</button>
+    </h3>
+
+    <div class="collapse pt-10 mb-0" id="collapseCategories">
+        <div class="container-categories mt-5">
+            @foreach($categories as $categorie)
+                <a href="{{ url('category/'.$categorie->term_id) }}" class="categorie-item"><span><i class="fa fa-tag"></i> &nbsp;{{ $categorie->name }}</span></a>
+            @endforeach
+        </div>
     </div>
+
 @endif
