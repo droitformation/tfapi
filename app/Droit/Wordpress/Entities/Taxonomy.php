@@ -7,7 +7,7 @@ class Taxonomy extends Model
     protected $connection = 'wordpress_db_connection';
     protected $table = 'wp_term_taxonomy';
     protected $primaryKey = 'term_taxonomy_id';
-    protected $with = ['term'];
+    protected $with = ['term','children'];
     public $timestamps = false;
 
     public function meta()
@@ -28,9 +28,14 @@ class Taxonomy extends Model
         return $query->where('taxonomy','=','category')->where('parent','=',0);
     }
 
-    public function parent()
+    public function children()
     {
-        return $this->belongsTo('App\Droit\Wordpress\Entites\Taxonomy', 'parent');
+        return $this->hasMany('App\Droit\Wordpress\Entites\Taxonomy', 'parent', 'term_id');
+    }
+
+    public function allChildrenAccounts()
+    {
+        return $this->children()->with('allChildrenAccounts');
     }
 
     public function posts()
