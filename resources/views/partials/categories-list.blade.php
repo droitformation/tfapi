@@ -1,7 +1,9 @@
 @if(!$categories->isEmpty())
-<ul class="list list-border angle-double-right">
-    @foreach($categories as $categorie)
-    <li><a href="#">{{ $categorie->name }}</a></li>
-    @endforeach
-</ul>
+
+    <ul>
+        @foreach($subcategories as $subcategorie)
+        <?php renderSidebar($subcategorie); ?>
+        @endforeach
+    </ul>
+
 @endif

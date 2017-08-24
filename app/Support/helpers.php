@@ -1,10 +1,41 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: cindyleschaud
- * Date: 11.07.17
- * Time: 11:23
+ * Menu
+ */
+
+function renderSidebar($node){
+
+    //if( $node->children->isEmpty() ) {  echo '<li>'.$node->term->name.'</li>';  }
+   // else{
+        $html = '<li>'.$node->term->name;
+
+        if(!$node->children->isEmpty()){
+            $html .= '<ol style="margin-left: 15px;">';
+
+            foreach($node->children as $child) {
+
+                $html .= '<li>'.$child->term->name;
+
+                foreach($child->children as $children) {
+                    $html .= '<ol style="margin-left: 15px;">';
+                    $html .= '<li>'.$children->term->name.'</li>';
+                    $html .= '</ol>';
+                }
+
+                $html .= '</li>';
+            }
+            $html .= '</ol>';
+        }
+
+        $html .= '</li>';
+
+        echo $html;
+    //}
+}
+
+/**
+ * helpers functions
  */
 
 function dateIsValid($date,$format = 'Y-m-d')
