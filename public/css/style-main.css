@@ -6300,8 +6300,9 @@ blockquote p {
 }
 .widget ul li,
 .widget .post {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 5px;
+  padding-bottom:5px;
+  line-height: 18px;
 }
 .widget.brochures > li {
   margin-bottom: 10px;

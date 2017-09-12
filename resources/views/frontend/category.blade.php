@@ -39,10 +39,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="widget widget-sidebar">
-                        <h5 class="widget-title line-bottom">Categories</h5>
-                        <div class="categories">
-                           @include('partials.categories-list')
-                        </div>
+                       @include('partials.categories-list')
                     </div>
                 </div>
             </div>

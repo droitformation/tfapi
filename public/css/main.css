@@ -154,6 +154,12 @@ body {
     text-align: justify;
 }
 
+.post-date{
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+}
+
 /* =============================================
     Flexbox align
 ============================================= */
@@ -204,4 +210,51 @@ body {
 
 .widget-sidebar{
     padding-left: 30px;
+}
+
+.widget ul li a{
+    color: #003f68;
+    font-size: 15px;
+}
+
+.widget ul li ol li a{
+    color: #3f3f3f;
+    font-size: 13px;
+}
+
+.categories li{
+    position: relative;
+    padding-left: 10px;
+}
+
+.subcategories{
+    margin-left: 0;
+    margin-top: 15px;
+}
+
+.subcategories li{
+    padding-left: 4px;
+}
+
+.subsubcategories{
+    padding-left: 8px;
+}
+
+.subsubcategories{
+    margin-top: 10px;
+}
+
+.widget ul li ol li{
+    padding-bottom: 3px;
+}
+
+.categories li .fa{
+    position: absolute;
+    font-size: 12px;
+    left: 0;
+    top: 5px;
+}
+
+.categories .btn{
+    margin-bottom: 8px;
 }

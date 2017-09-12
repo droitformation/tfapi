@@ -1,10 +1,14 @@
 @foreach($posts as $post)
-    <div class="post-arret">
+    <div class="post-arret" id="{{ $post->ID }}">
         <h3 class="post-title">
             {{ $post->post_title }}
         </h3>
+        <h4 class="post-date">
+            {{ $post->post_date }}
+        </h4>
+
         <div class="post-content">
-            {!! nl2br($post->post_content) !!}
+            {!! ($post->content) !!}
         </div>
     </div>
 @endforeach

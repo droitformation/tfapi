@@ -8,6 +8,16 @@ class Post extends Model {
     protected $table = 'wp_posts';
     protected $primaryKey = 'ID';
 
+    public function getContentAttribute()
+    {
+        return wpautop($this->post_content);
+    }
+
+    public function getEditionAttribute()
+    {
+        //return !$this->annee->isEmpty() ? $this->annee->first() : null;
+    }
+
     /**
      * Get the postmeta for the blog post.
      */
@@ -20,6 +30,13 @@ class Post extends Model {
         return $this->belongsToMany(
             'App\Droit\Wordpress\Entites\Taxonomy', 'wp_term_relationships', 'object_id', 'term_taxonomy_id'
         );
+    }
+
+    public function annee()
+    {
+        return $this->belongsToMany(
+            'App\Droit\Wordpress\Entites\Taxonomy', 'wp_term_relationships', 'object_id', 'term_taxonomy_id'
+        )->where('taxonomy', '=' ,'annee');
     }
 
     public function categories()
@@ -59,5 +76,7 @@ class Post extends Model {
             ->type()
             ->get();
     }
+
+
 
 }

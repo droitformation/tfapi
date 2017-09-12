@@ -8,6 +8,7 @@ class Taxonomy extends Model
     protected $table = 'wp_term_taxonomy';
     protected $primaryKey = 'term_taxonomy_id';
     protected $with = ['term','children'];
+    protected $dates = ['post_date'];
     public $timestamps = false;
 
     public function meta()
@@ -28,6 +29,11 @@ class Taxonomy extends Model
         return $query->where('taxonomy','=','category')->where('parent','=',0);
     }
 
+    public function parent_cat()
+    {
+        return $this->belongsTo('App\Droit\Wordpress\Entites\Taxonomy','parent', 'term_id');
+    }
+
     public function children()
     {
         return $this->hasMany('App\Droit\Wordpress\Entites\Taxonomy', 'parent', 'term_id');
@@ -40,7 +46,8 @@ class Taxonomy extends Model
 
     public function posts()
     {
-        return $this->belongsToMany('App\Droit\Wordpress\Entites\Post', 'wp_term_relationships', 'term_taxonomy_id', 'object_id');
+        return $this->belongsToMany('App\Droit\Wordpress\Entites\Post', 'wp_term_relationships', 'term_taxonomy_id', 'object_id')
+            ->orderBy('post_date','DESC');
     }
 
     /**

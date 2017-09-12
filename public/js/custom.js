@@ -81,16 +81,6 @@
         /* ---------------------------------------------------------------------- */
         /* ------------------------------ Demo Switcher  ------------------------ */
         /* ---------------------------------------------------------------------- */
-        TM_demoSwitcher: function() {
-            var showSwitcher = true;
-            if( showSwitcher ) {
-                $.ajax({
-                    url: "color-switcher/style-switcher.html",
-                    success: function (data) { $('body').append(data); },
-                    dataType: 'html'
-                });
-            }
-        },
 
         /* ---------------------------------------------------------------------- */
         /* ------------------------------ preloader  ---------------------------- */
@@ -1168,36 +1158,7 @@
         /* ---------------------------------------------------------------------- */
         /* ---------------------------- Twitter Feed  --------------------------- */
         /* ---------------------------------------------------------------------- */
-        TM_twittie: function() {
-            var $twitter_feed = $('.twitter-feed');
-            var $twitter_feed_carousel = $('.twitter-feed-carousel');
 
-            $twitter_feed.twittie({
-                username: $twitter_feed.data('username'),
-                dateFormat: '%b. %d, %Y',
-                template: '{{tweet}} <div class="date">{{date}}</div>',
-                count: ( $twitter_feed.data("count") === undefined ) ? 3: $twitter_feed.data("count"),
-                loadingText: 'Loading!'
-            });
-
-            $twitter_feed_carousel.twittie({
-                username: $twitter_feed_carousel.data('username'),
-                dateFormat: '%b. %d, %Y',
-                template: '{{tweet}} <div class="date">{{date}}</div>',
-                count: ( $twitter_feed_carousel.data("count") === undefined ) ? 3: $twitter_feed_carousel.data("count"),
-                loadingText: 'Loading!'
-            }, function() {
-                $twitter_feed_carousel.find('ul').owlCarousel({
-                    rtl: THEMEMASCOT.isRTL.check(),
-                    autoplay: true,
-                    autoplayTimeout: 2000,
-                    loop: true,
-                    items: 1,
-                    dots: true,
-                    nav: false
-                });
-            });
-        }
     };
 
     THEMEMASCOT.slider = {

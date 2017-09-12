@@ -16,9 +16,6 @@ class CategoryController extends Controller
                             })
                             ->get();
 
-        echo '<pre>';
-        print_r($subcategories);
-        echo '</pre>';
         return view('frontend.category')->with(['categorie' => $categorie, 'subcategories' => $subcategories]);
     }
 }
