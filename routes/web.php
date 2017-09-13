@@ -26,6 +26,7 @@ Route::post('code', 'CodeController@code')->name('code');
 
 Route::get('page', 'HomeController@page')->name('page');
 Route::get('category/{id}', 'CategoryController@show')->name('category');
+Route::get('post/{id}', 'PostController@show')->name('post');
 
 /*
 |--------------------------------------------------------------------------

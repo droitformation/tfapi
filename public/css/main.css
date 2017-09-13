@@ -222,18 +222,22 @@ body {
     font-size: 13px;
 }
 
-.categories li{
-    position: relative;
-    padding-left: 10px;
-}
-
 .subcategories{
     margin-left: 0;
     margin-top: 15px;
 }
 
 .subcategories li{
-    padding-left: 4px;
+    position: relative;
+    padding-left: 10px;
+}
+
+
+.subcategories li .fa{
+    position: absolute;
+    font-size: 12px;
+    left: 0;
+    top: 5px;
 }
 
 .subsubcategories{
@@ -246,13 +250,6 @@ body {
 
 .widget ul li ol li{
     padding-bottom: 3px;
-}
-
-.categories li .fa{
-    position: absolute;
-    font-size: 12px;
-    left: 0;
-    top: 5px;
 }
 
 .categories .btn{

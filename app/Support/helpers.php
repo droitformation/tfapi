@@ -8,14 +8,15 @@ function renderSidebar($node){
 
     //if( $node->children->isEmpty() ) {  echo '<li>'.$node->term->name.'</li>';  }
    // else{
-        $html = '<li><a href="'.url('category/'.$node->term_id).'"><i class="fa fa-caret-right"></i> '.$node->term->name.'</a>';
+       // $html = '<li><a href="'.url('category/'.$node->term_id).'"><i class="fa fa-caret-right"></i> '.$node->term->name.'</a>';
+        $html = '';
 
         if(!$node->children->isEmpty()){
             $html .= '<ol class="subcategories">';
 
             foreach($node->children as $child) {
 
-                $html .= '<li><a href="'.url('category/'.$child->term_id).'">'.$child->term->name.'</a>';
+                $html .= '<li><a href="'.url('category/'.$child->term_id).'"><i class="fa fa-caret-right"></i>  '.$child->term->name.'</a>';
 
                 foreach($child->children as $children) {
                     $html .= '<ol class="subsubcategories">';

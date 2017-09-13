@@ -26,7 +26,11 @@ class Taxonomy extends Model
     }
 
     public function scopeTopCategories($query) {
-        return $query->where('taxonomy','=','category')->where('parent','=',0);
+        return $query->select('taxonomy', 'parent', 'wp_terms.term_id', 'wp_terms.name')
+            ->where('taxonomy','=','category')
+            ->where('parent','=',0)
+            ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')
+            ->orderBy('wp_terms.name','ASC');
     }
 
     public function parent_cat()
@@ -36,7 +40,9 @@ class Taxonomy extends Model
 
     public function children()
     {
-        return $this->hasMany('App\Droit\Wordpress\Entites\Taxonomy', 'parent', 'term_id');
+        return $this->hasMany('App\Droit\Wordpress\Entites\Taxonomy', 'parent', 'term_id')
+            ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')
+            ->orderBy('wp_terms.name','ASC');
     }
 
     public function allChildrenAccounts()
@@ -65,5 +71,10 @@ class Taxonomy extends Model
         }
 
         return parent::__get($key);
+    }
+
+    static function getTerm($id)
+    {
+        return Taxonomy::with(['parent_cat.term'])->where('wp_term_taxonomy.term_id','=',$id)->firstOrFail();
     }
 }

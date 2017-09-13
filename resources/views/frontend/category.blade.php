@@ -30,10 +30,12 @@
             <div class="row">
                 <div class="col-md-8">
 
-                    <h5 class="font-weight-600 font-16 text-danger">{{ $categorie->term->name }}</h5>
+                    <h5 class="font-weight-600 font-16 text-danger">{{ $categorie->name }}</h5>
 
-                    @if(!$categorie->posts->isEmpty())
-                        @include('partials.posts', ['posts' => $categorie->posts])
+                    @if(!$posts->isEmpty())
+                        @include('partials.posts', ['posts' => $posts])
+
+                        {{ $posts->links() }}
                     @endif
 
                 </div>

@@ -8,14 +8,13 @@ class CategoryController extends Controller
 {
     public function show($id)
     {
-        $categorie     = \App\Droit\Wordpress\Entites\Taxonomy::where('term_id','=',$id)->firstOrFail();
-        $subcategories = \App\Droit\Wordpress\Entites\Taxonomy::where('taxonomy','=','category')
-                            ->where('parent','=',$id)
-                            ->join('wp_terms', function ($join) {
-                                $join->on('wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')->orderBy('name');
-                            })
-                            ->get();
+        $categorie = \App\Droit\Wordpress\Entites\Term::with(['children','parent_cat'])->find($id);
+        $posts     = \App\Droit\Wordpress\Entites\Post::getPostsByCategories([$id],'20152016');
 
-        return view('frontend.category')->with(['categorie' => $categorie, 'subcategories' => $subcategories]);
+        echo '<pre>';
+        print_r($posts->first());
+        echo '</pre>';exit();
+
+        return view('frontend.category')->with(['categorie' => $categorie, 'posts' => $posts]);
     }
 }

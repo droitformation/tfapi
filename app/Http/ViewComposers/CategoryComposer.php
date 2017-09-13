@@ -15,12 +15,8 @@ class CategoryComposer
     public function compose(View $view)
     {
         $top_categories = \App\Droit\Wordpress\Entites\Taxonomy::topCategories()->get();
-        $top_categories = $top_categories->slice(1)->pluck('term');
-
-       // $all_categories = \App\Droit\Wordpress\Entites\Taxonomy::all();
-        //$all_categories = $all_categories->slice(1)->pluck('term');
+        $top_categories = $top_categories->pluck('name','term_id');
 
         $view->with('top_categories', $top_categories);
-        //$view->with('all_categories', $all_categories);
     }
 }
