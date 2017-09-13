@@ -8,13 +8,10 @@ class CategoryController extends Controller
 {
     public function show($id)
     {
-        $categorie = \App\Droit\Wordpress\Entites\Term::with(['children','parent_cat'])->find($id);
-        $posts     = \App\Droit\Wordpress\Entites\Post::getPostsByCategories([$id],'20152016');
+        $categorie  = \Corcel\Model\Taxonomy::category()->slug($id)->get();
+        $categories = \App\Droit\Wordpress\Entites\Term::with(['children','parent_cat'])->find($id);
+        $posts      = \Corcel\Model\Post::taxonomy('category',$id)->get();
 
-        echo '<pre>';
-        print_r($posts->first());
-        echo '</pre>';exit();
-
-        return view('frontend.category')->with(['categorie' => $categorie, 'posts' => $posts]);
+        return view('frontend.category')->with(['categorie' => $categorie->first(), 'categories' => $categories, 'posts' => $posts]);
     }
 }

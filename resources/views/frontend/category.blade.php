@@ -34,8 +34,6 @@
 
                     @if(!$posts->isEmpty())
                         @include('partials.posts', ['posts' => $posts])
-
-                        {{ $posts->links() }}
                     @endif
 
                 </div>

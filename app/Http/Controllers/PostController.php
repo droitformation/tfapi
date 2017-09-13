@@ -12,8 +12,11 @@ class PostController extends Controller
         $post = \Corcel\Model\Post::find($id);
 
         $annees =  \Corcel\Model\Post::taxonomy('category','Arbitrage')->taxonomy('annee','20152016')->get();
+
+        $categories = \Corcel\Model\Taxonomy::where('taxonomy', 'category')->where('parent','=',0)->get();
+
         echo '<pre>';
-        print_r($annees->pluck('ID'));
+        print_r($categories->pluck('term'));
         echo '</pre>';exit();
 
     }
