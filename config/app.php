@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CollectionExtensions::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Corcel\Laravel\CorcelServiceProvider::class,
 
     ],
 

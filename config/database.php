@@ -54,10 +54,24 @@ return [
             'engine' => null,
         ],
 
+        'wordpress'       => [ // for WordPress database (used by Corcel)
+            'driver'      => 'mysql',
+            'host'        => 'localhost',
+            'database'    => env('DB_WORDPRESS_DATABASE', 'wordpress'),
+            'username'    => env('DB_WORDPRESS_USERNAME', 'root'),
+            'password'    => env('DB_WORDPRESS_PASSWORD', 'root'),
+            'charset'     => 'utf8mb4',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'unix_socket' => env('DB_SOCKET', ''),
+            'prefix'      => 'wp_',
+            'strict'      => false,
+            'engine'      => null,
+        ],
+
         'wordpress_db_connection' => [
-            'driver' => 'mysql',
-            'host'      => env('DB_TEST_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
+            'driver'   => 'mysql',
+            'host'     => env('DB_TEST_HOST', 'localhost'),
+            'port'     => env('DB_PORT', '3306'),
             'database' => env('DB_WORDPRESS_DATABASE', 'wordpress'),
             'username' => env('DB_WORDPRESS_USERNAME', 'root'),
             'password' => env('DB_WORDPRESS_PASSWORD', 'root'),
