@@ -35,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerUserService();
         $this->registerDecisionWorkerService();
         $this->registerAlertWorkerService();
+        $this->registerTaxonomyRepoService();
+        $this->registerPostRepoService();
     }
 
     /**
@@ -107,6 +109,31 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Droit\Categorie\Repo\CategorieKeywordEloquent(
                 new \App\Droit\Categorie\Entities\Categorie_keyword()
+            );
+        });
+    }
+
+    /**
+     * TaxonomyRepo
+     */
+    protected function registerTaxonomyRepoService(){
+
+        $this->app->singleton('App\Droit\Wordpress\Repo\TaxonomyRepo', function() {
+            return new \App\Droit\Wordpress\Repo\TaxonomyRepo(
+                new \App\Droit\Wordpress\Entites\Taxonomy(),
+                new \App\Droit\Wordpress\Entites\Term()
+            );
+        });
+    }
+
+    /**
+     * PostRepo
+     */
+    protected function registerPostRepoService(){
+
+        $this->app->singleton('App\Droit\Wordpress\Repo\PostRepo', function() {
+            return new \App\Droit\Wordpress\Repo\PostRepo(
+                new \App\Droit\Wordpress\Entites\Post()
             );
         });
     }

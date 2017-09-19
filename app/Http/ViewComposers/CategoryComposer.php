@@ -14,8 +14,9 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $top_categories = \Corcel\Model\Taxonomy::where('taxonomy', 'category')->where('parent','=',0)->get();
-        $top_categories = $top_categories->pluck('term');
+        $taxonomy_repo = \App::make('App\Droit\Wordpress\Repo\TaxonomyRepo');
+
+        $top_categories = $taxonomy_repo->getTopCategories();
 
         $view->with('top_categories', $top_categories);
     }

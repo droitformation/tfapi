@@ -4,9 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a47ca16e0f7a6092b1c0d830f152304",
-    "content-hash": "30c8d8392478cd2a53c804321394282b",
+    "hash": "3fc41934dcc57ae27091bfde7d73677b",
+    "content-hash": "1ad74c74d75e0ca27ad3e9824a01e7b2",
     "packages": [
+        {
+            "name": "corcel/acf",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/corcel/acf.git",
+                "reference": "a8ee2f9d1cef6928c0edab756a51de78bf7a6306"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/corcel/acf/zipball/a8ee2f9d1cef6928c0edab756a51de78bf7a6306",
+                "reference": "a8ee2f9d1cef6928c0edab756a51de78bf7a6306",
+                "shasum": ""
+            },
+            "require": {
+                "jgrossi/corcel": "~2.1",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Corcel\\Acf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Junior Grossi",
+                    "email": "juniorgro@gmail.com",
+                    "homepage": "http://jgrossi.com"
+                }
+            ],
+            "description": "Advanced Custom Field (ACF) plugin for Corcel",
+            "homepage": "http://github.com/corcel/acf",
+            "time": "2017-08-07 00:35:40"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",

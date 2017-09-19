@@ -4,11 +4,7 @@
         <h4 class="post-date">{{ $post->post_date }}</h4>
         <div class="post-content">
             {!! ($post->content) !!}
-            <?php
-            echo '<pre>';
-            print_r($post->annee);
-            echo '</pre>';
-            ?>
+            <p><strong>{{ $post->meta->auteur }}</strong></p>
         </div>
     </div>
 @endforeach

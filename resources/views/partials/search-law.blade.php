@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
 
-        <form class="form-inline" method="POST" action="{{ url('terms') }}">{{ csrf_field() }}
+        <form class="form-inline" method="POST" action="{{ url('law') }}">{{ csrf_field() }}
             <label for="terms" class="pull-left mb-10">Recherche par article</label>
             <small class="text-muted pull-right">
                 Exemple = article : <strong>405</strong> ,

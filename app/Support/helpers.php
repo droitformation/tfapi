@@ -16,12 +16,14 @@ function renderSidebar($node){
 
             foreach($node->children as $child) {
 
-                $html .= '<li><a href="'.url('category/'.$child->term_id).'"><i class="fa fa-caret-right"></i>  '.$child->term->name.'</a>';
+                $html .= '<li><a href="'.url('category/'.$child->slug).'"><i class="fa fa-caret-right"></i>  '.$child->term->name.'</a>';
 
-                foreach($child->children as $children) {
-                    $html .= '<ol class="subsubcategories">';
-                    $html .= '<li><a href="'.url('category/'.$children->term_id).'">'.$children->term->name.'</a></li>';
-                    $html .= '</ol>';
+                if(isset($child->children) && !$child->children->isEmpty()){
+                    foreach($child->children as $children) {
+                        $html .= '<ol class="subsubcategories">';
+                        $html .= '<li><a href="'.url('category/'.$children->slug).'">'.$children->term->name.'</a></li>';
+                        $html .= '</ol>';
+                    }
                 }
 
                 $html .= '</li>';
@@ -33,6 +35,23 @@ function renderSidebar($node){
 
         echo $html;
     //}
+}
+
+function prepareTerms($terms){
+
+    $search = htmlspecialchars_decode($terms);
+
+    return collect(explode(',',$search))->groupBy(function ($item, $key) {
+        return preg_match('/\"([^\"]*?)\"/', $item, $m) ? 'quotes' : 'noquotes';
+    })->map(function ($items, $key) {
+        return $items->map(function ($item, $key2) use ($key) {
+            $item = trim(str_replace('"', '', $item));// Clean quotes
+
+            if($key == 'quotes'){ return '% '.$item.' %'; }
+            return '%'.$item.'%';
+        });
+    })->flatten(1);
+
 }
 
 /**

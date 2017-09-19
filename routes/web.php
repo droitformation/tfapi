@@ -18,14 +18,16 @@ Route::get('update', 'ArticleController@update');
 Route::get('mail', 'ArticleController@mail');
 Route::get('abos', 'ArticleController@abos');
 
-Route::match(['get', 'post'], 'search', 'ArticleController@search');
+Route::match(['get', 'post'], 'search', 'SearchController@search');
+Route::match(['get', 'post'], 'law', 'SearchController@law');
 
 Auth::routes();
 
 Route::post('code', 'CodeController@code')->name('code');
 
 Route::get('page', 'HomeController@page')->name('page');
-Route::get('category/{id}', 'CategoryController@show')->name('category');
+Route::get('category', 'CategoryController@index')->name('category');
+Route::get('category/{id}/{year?}', 'CategoryController@show')->name('show_category');
 Route::get('post/{id}', 'PostController@show')->name('post');
 
 /*
@@ -46,3 +48,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
     Route::get('fileJson/{id?}', ['uses' => 'Backend\UploadController@fileJson']);
 
 });
+
+Route::get('prepare', function()
+{
+    $terms = [
+        'article' => 9,
+        'loi'     => 'OMP',
+        'alinea'  => 1,
+        'chiffre' => null,
+        'lettre'  => null,
+    ];
+
+    $terms = implode(':',array_filter($terms));
+
+    echo '<pre>';
+    print_r($terms);
+    echo '</pre>';exit();
+});
+
