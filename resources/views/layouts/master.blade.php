@@ -94,6 +94,7 @@
 <!-- Footer Scripts -->
 <!-- JS | Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('js/custom.js',env('SECURE_ASSET')) }}"></script>
+<script type="text/javascript" src="{{ asset('js/app.js',env('SECURE_ASSET')) }}"></script>
 
 </body>
 </html>

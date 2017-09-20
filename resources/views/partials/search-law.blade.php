@@ -1,5 +1,7 @@
 <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-body" id="app">
+
+        <recherche></recherche>
 
         <form class="form-inline" method="POST" action="{{ url('law') }}">{{ csrf_field() }}
             <label for="terms" class="pull-left mb-10">Recherche par article</label>

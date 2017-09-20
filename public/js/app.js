@@ -797,7 +797,7 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(36));
+Vue.component('recherche', __webpack_require__(36));
 
 var app = new Vue({
   el: '#app'
@@ -41787,9 +41787,9 @@ var Component = __webpack_require__(37)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/MAMP/htdocs/tfapi/resources/assets/js/components/Example.vue"
+Component.options.__file = "/Applications/MAMP/htdocs/tfapi/resources/assets/js/components/Recherche.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Recherche.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -41798,9 +41798,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0232c3ec", Component.options)
+    hotAPI.createRecord("data-v-52063fca", Component.options)
   } else {
-    hotAPI.reload("data-v-0232c3ec", Component.options)
+    hotAPI.reload("data-v-52063fca", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -41961,7 +41961,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0232c3ec", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-52063fca", module.exports)
   }
 }
 
