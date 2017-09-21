@@ -35,7 +35,10 @@ class SearchController extends Controller
         $posts = collect([]);
         $laws = collect([]);
 
-        if(!empty($request->input('laws',[]))){
+        $lois = collect(array_map('array_filter',$request->input('laws',[])))->values()->flatten(1);
+
+        if(!$lois->isEmpty()){
+
             $laws = collect($request->input('laws'))->transpose()->map(function ($item, $key) {
                 return [
                     'article' => isset($item[0]) ? $item[0] : null,
@@ -45,7 +48,7 @@ class SearchController extends Controller
                     'lettre'  => isset($item[4]) ? $item[4] : null,
                 ];
             })->map(function ($item, $key) {
-                return  implode(':',array_filter($item));
+                return implode(':', array_filter($item));
             });
 
             $posts = $this->post_repo->searchLaw($laws);
