@@ -33,17 +33,24 @@ class SearchController extends Controller
     public function law(Request $request)
     {
         $posts = collect([]);
+        $laws = collect([]);
 
-        if(!empty($request->except('_token'))){
+        if(!empty($request->input('laws',[]))){
+            $laws = collect($request->input('laws'))->transpose()->map(function ($item, $key) {
+                return [
+                    'article' => isset($item[0]) ? $item[0] : null,
+                    'loi'     => isset($item[1]) ? $item[1] : null,
+                    'alinea'  => isset($item[2]) ? $item[2] : null,
+                    'chiffre' => isset($item[3]) ? $item[3] : null,
+                    'lettre'  => isset($item[4]) ? $item[4] : null,
+                ];
+            })->map(function ($item, $key) {
+                return  implode(':',array_filter($item));
+            });
 
-            $law   = implode(':',array_filter($request->except('_token')));
-            $posts = $this->post_repo->searchLaw($law);
+            $posts = $this->post_repo->searchLaw($laws);
         }
 
-        $terms = collect(array_filter($request->except('_token')))->map(function ($item, $key) {
-            return $key.' '.$item;
-        })->toArray();
-
-        return view('frontend.results')->with(['posts' => $posts, 'terms' => implode(', ',$terms)]);
+        return view('frontend.results')->with(['posts' => $posts, 'terms' => $laws->implode(',')]);
     }
 }

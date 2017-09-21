@@ -12,6 +12,15 @@
 
     <title>{{ config('app.name', 'Droit pour le Praticien') }}</title>
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+            'url'   => url('/'),
+            'ajaxUrl' => url('admin/ajax/'),
+            'adminUrl' => url('admin/')
+        ]); ?>
+    </script>
+
     <!-- Favicon and Touch Icons -->
     <link href="images/favicon.png" rel="shortcut icon" type="image/png">
 
@@ -21,6 +30,7 @@
 
     <link href="{{ asset('css/animate.css',env('SECURE_ASSET')) }}" rel="stylesheet">
     <link href="{{ asset('css/css-plugin-collections.css',env('SECURE_ASSET')) }}" rel="stylesheet">
+
     <!-- CSS | menuzord megamenu skins -->
     <link id="menuzord-menu-skins" href="{{ asset('css/menuzord-boxed.css',env('SECURE_ASSET')) }}" rel="stylesheet">
     <!-- CSS | Main style file -->
@@ -32,27 +42,12 @@
     <!-- CSS | Responsive media queries -->
     <link href="{{ asset('css/responsive.css',env('SECURE_ASSET')) }}" rel="stylesheet">
     <link href="{{ asset('css/main.css',env('SECURE_ASSET')) }}" rel="stylesheet">
-    <!-- Styles
-    <link href="{{ asset('css/app.css',env('SECURE_ASSET')) }}" rel="stylesheet">
-    -->
-
-    <!-- Revolution Slider 5.x CSS settings -->
-    <script type="text/javascript" src="{{ asset('js/settings.js',env('SECURE_ASSET')) }}"></script>
-    <script type="text/javascript" src="{{ asset('js/layers.js',env('SECURE_ASSET')) }}"></script>
-    <script type="text/javascript" src="{{ asset('js/navigation.js',env('SECURE_ASSET')) }}"></script>
 
     <!-- external javascripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="//use.fontawesome.com/fd16a07224.js"></script>
-
-    <!-- JS | jquery plugin collection for this theme -->
-    <script type="text/javascript" src="{{ asset('js/jquery-plugin-collection.js',env('SECURE_ASSET')) }}"></script>
-
-    <!-- Revolution Slider 5.x SCRIPTS -->
-    <script type="text/javascript" src="{{ asset('js/jquery.themepunch.tools.min.js',env('SECURE_ASSET')) }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.themepunch.revolution.min.js',env('SECURE_ASSET')) }}"></script>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -93,7 +88,7 @@
 
 <!-- Footer Scripts -->
 <!-- JS | Custom script for all pages -->
-<script type="text/javascript" src="{{ asset('js/custom.js',env('SECURE_ASSET')) }}"></script>
+
 <script type="text/javascript" src="{{ asset('js/app.js',env('SECURE_ASSET')) }}"></script>
 
 </body>

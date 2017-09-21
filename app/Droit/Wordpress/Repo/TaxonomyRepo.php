@@ -16,7 +16,13 @@ class TaxonomyRepo
 
     public function getTopCategories()
     {
-        $top_categories = $this->taxonomy->where('taxonomy', 'category')->where('parent','=',0)->get();
+        $top_categories = $this->taxonomy->where('taxonomy', 'category')
+            ->where('count','>',0)
+            ->whereNotIn('terms.term_id',[3])
+            ->where('parent','=',0)
+            ->join('terms', 'term_taxonomy.term_id', '=', 'terms.term_id')
+            ->orderBy('terms.name','ASC')
+            ->get();
 
         return !$top_categories->isEmpty() ? $top_categories->pluck('term') : collect([]);
     }

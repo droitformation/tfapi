@@ -32,12 +32,14 @@ class PostRepo
         return $this->post->search($terms)->published()->orderBy('post_date','DESC')->paginate(10);
     }
 
-    public function searchLaw($law)
+    public function searchLaw($laws)
     {
         return $this->post
             ->join('postmeta', 'posts.ID','=', 'postmeta.post_id')
-            ->where(function ($query) use($law) {
-                $query->where('postmeta.meta_key', '=', 'termes_rechercher')->where('postmeta.meta_value', 'LIKE', '%'.$law.'%');
+            ->where(function ($query) use ($laws) {
+                foreach ($laws as $law){
+                    $query->where('postmeta.meta_key', '=', 'termes_rechercher')->where('postmeta.meta_value', 'LIKE', '%'.$law.'%');
+                }
             })
             ->published()
             ->orderBy('post_date','DESC')

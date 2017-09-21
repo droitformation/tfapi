@@ -1,9 +1,12 @@
 <div class="panel panel-default">
     <div class="panel-body" id="app">
 
-        <recherche></recherche>
-
         <form class="form-inline" method="POST" action="{{ url('law') }}">{{ csrf_field() }}
+            <recherche></recherche>
+        </form>
+{{--
+        <form class="form-inline" method="POST" action="{{ url('law') }}">{{ csrf_field() }}
+
             <label for="terms" class="pull-left mb-10">Recherche par article</label>
             <small class="text-muted pull-right">
                 Exemple = article : <strong>405</strong> ,
@@ -27,6 +30,6 @@
                 <input type="text" class="form-control w-80" placeholder="Lettre" name="lettre">
             </div>
             <button type="submit" class="btn btn-sm btn-dark">OK</button>
-        </form>
+        </form>--}}
     </div>
 </div>
