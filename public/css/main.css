@@ -65,7 +65,9 @@ body {
     margin-left: 5px;
 }
 
-
+.menuzord-menu {
+    float: right;
+}
 .menuzord-menu > li.active > a,
 .menuzord-menu > li:hover > a,
 .menuzord-menu ul.dropdown li:hover > a{
@@ -125,15 +127,20 @@ body {
     color: #FFFFFF;
     display: block;
     font-size: 18px;
-    padding: 8px;
+    padding: 15px 0;
     line-height: 25px;
     text-align: center;
     text-transform: uppercase;
     word-spacing: 2px;
 }
 
+.arrets-links-border{
+    border-right: 1px solid #0b3550;
+}
+
 .arrets-links-bloc:hover{
-    color: #d6e9f5;
+    background: #0b3550;
+    color: #FFFFFF;
 }
 
 .arrets-links-bloc span {
@@ -272,3 +279,28 @@ body {
 .panel-boutons a.btn.active{
     background: #000;
 }
+
+.icons{
+    display:inline-block;
+    font-style:normal;
+    font-weight:normal;
+    line-height:1;
+    position:relative;
+    top:1px;
+    height:40px;
+    width:40px
+}
+.icon-law{
+    background:url(../images/icons/law.png) no-repeat
+}
+.icon-tf{
+    background:url(../images/icons/tf.png) no-repeat
+}
+.icon-email{
+    background:url(../images/icons/email.png) no-repeat
+}
+.alignleft{
+    float: left;
+    margin: 10px 15px 20px 0;
+}
+

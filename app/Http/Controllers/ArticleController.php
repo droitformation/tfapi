@@ -110,44 +110,6 @@ class ArticleController extends Controller
 
     public function test()
     {
-
-        // 2017-03-20
-      // Missing dates to update
-/*        $start_date = \Carbon\Carbon::createFromDate(2013, 12, 20)->startOfDay();
-        $end_date   = \Carbon\Carbon::createFromDate(2013, 12, 31)->startOfDay();
-        $missing    = collect(generateDateRange($start_date, $end_date));
-
-        $worker = \App::make('App\Droit\Decision\Worker\DecisionWorkerInterface');
-        $worker->setMissingDates($missing)->update();
-
-        exit;*/
-
-        $repo = \App::make('App\Droit\Decision\Repo\DecisionInterface');
-
-/*        $results = collect([]);
-
-        $tables = archiveTableForDates('2016-01-01','2017-08-07');
-
-        foreach ($tables as $table) {
-
-            $name = $table == date('Y') ? 'decisions' : 'archive_'.$table;
-
-            $result  = $repo->searchTable($name,['period' => ['2016-01-01','2017-08-07'], 'terms' => '135 III 397', 'published' => true]);
-            $results = $results->merge($result);
-        }*/
-
-        $params  = [
-            'period'    => ['2016-01-01','2017-08-07'],
-            'terms'     => '135 III 397',
-            'published' => true
-        ];
-
-        $results = $repo->searchArchives($params);
-
-        echo '<pre>';
-        print_r($results->pluck('numero'));
-        echo '</pre>';exit;
-
         // Table correspondances
         $archives = [
             2012 => 'wp_archives',

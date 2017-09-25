@@ -78,4 +78,5 @@ class Table
     {
         return \DB::table($table)->whereYear('publication_at', $this->year)->count();
     }
+
 }

@@ -1,7 +1,7 @@
 <section class="bg-dark">
-    <div class="container pt-0 pb-10">
+    <div class="container pt-0 pb-0">
         <div class="row">
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-6 arrets-links-border">
                 <a href="{{ url('category') }}" class="arrets-links-bloc " title="ConsulterArrêts principaux résumés"><span>Consulter</span>Arrêts principaux résumés</a>
             </div>
             <div class="col-sm-6 col-md-6">

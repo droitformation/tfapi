@@ -7,7 +7,7 @@ class Taxonomy extends Corcel
 {
     function theparent()
     {
-        return $this->belongsTo(Taxonomy::class, 'parent');
+        return $this->belongsTo(Taxonomy::class, 'parent','term_id');
     }
 
     public function children()

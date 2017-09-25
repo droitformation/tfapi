@@ -33,6 +33,10 @@ class Post extends Corcel {
         }
     }
 
+    public function scopeBySlug($query, $slug) {
+        return $query->where('post_name', '=' ,$slug);
+    }
+
     public function scopeSearch($query,$terms)
     {
         if($terms && !empty($terms))

@@ -48,7 +48,7 @@ return [
     */
 
     'shortcodes' => [
-//        'foo' => App\Shortcodes\FooShortcode::class,
+        'pub_droitpraticien' => \App\Shortcodes\PubShortcode::class,
     ],
 
 ];

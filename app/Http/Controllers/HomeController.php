@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Droit\Wordpress\Repo\PostRepo;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    protected $post_repo;
 
+    public function __construct(PostRepo $post_repo)
+    {
+        $this->post_repo = $post_repo;
     }
 
     public function index()
@@ -21,10 +19,10 @@ class HomeController extends Controller
         return view('frontend.index');
     }
 
-    public function page()
+    public function page($slug)
     {
-        $posts  = \App\Droit\Wordpress\Entites\Post::type()->status()->with(['postmetas'])->take(5)->get();
+        $page = $this->post_repo->getBySlug($slug);
 
-        return view('frontend.page')->with(['posts' => $posts]);
+        return view('frontend.page')->with(['page' => $page]);
     }
 }

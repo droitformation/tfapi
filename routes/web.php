@@ -25,7 +25,7 @@ Auth::routes();
 
 Route::post('code', 'CodeController@code')->name('code');
 
-Route::get('page', 'HomeController@page')->name('page');
+Route::get('page/{slug}', 'HomeController@page')->name('page');
 Route::get('category', 'CategoryController@index')->name('category');
 Route::get('category/{id}/{year?}', 'CategoryController@show')->name('show_category');
 Route::get('post/{id}', 'PostController@show')->name('post');
@@ -51,6 +51,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 
 Route::get('prepare', function()
 {
+    $taxonomy = App\Droit\Wordpress\Entites\Taxonomy::with('theparent')->where('term_id', '=',3229)->get()->first();
+
+    echo '<pre>';
+    print_r($taxonomy);
+    echo '</pre>';exit();
+
     $terms = [
         'article' => 9,
         'loi'     => 'OMP',

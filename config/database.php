@@ -57,7 +57,7 @@ return [
         'wordpress'       => [ // for WordPress database (used by Corcel)
             'driver'      => 'mysql',
             'host'        => 'localhost',
-            'database'    => env('DB_WORDPRESS_DATABASE', 'wordpress'),
+            'database'    => env('DB_WORDPRESS_DATABASE', 'droitpraticien'),
             'username'    => env('DB_WORDPRESS_USERNAME', 'root'),
             'password'    => env('DB_WORDPRESS_PASSWORD', 'root'),
             'charset'     => 'utf8mb4',

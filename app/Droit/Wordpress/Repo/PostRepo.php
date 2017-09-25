@@ -11,6 +11,11 @@ class PostRepo
         $this->post = $post;
     }
 
+    public function getBySlug($slug)
+    {
+        return $this->post->where('post_name', '=', $slug)->firstOrFail();
+    }
+
     public function getPostByCategory($id)
     {
         return $this->post->taxonomy('category',$id)->with(['taxonomies' => function ($query) {
